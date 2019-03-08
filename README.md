@@ -1,4 +1,4 @@
-# bet-app-cli
+# steady-bet-cli
 
 ## Project setup
 ```

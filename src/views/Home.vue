@@ -2,14 +2,11 @@
   <div class="home">
     <div class="col-container">
       <div class="column1">
-        <h2>Column 1</h2>
-        <p>Some text..</p>
+        <MenuItems @nodeSelected="(id)=>selectNode(id)"/>
       </div>
       <div class="column2" >
-        <h2>Column 2</h2>
-        <p>Some text..</p>
-        <p>Some text..</p>
-        <p>Some text..</p>
+        <p>{{ idSelected }}</p>
+
                                                      
       </div>
       <div class="column3">
@@ -22,16 +19,22 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import MenuItems from "@/components/MenuItems/MenuItems.vue";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    MenuItems
   },
   data(){
     return{
-      menuItems: []
+      idSelected: ''
+    }
+  },
+  methods: {
+    selectNode(id){
+      console.log("parent say id is :"+id)
+      this.idSelected = id
     }
   }
 };

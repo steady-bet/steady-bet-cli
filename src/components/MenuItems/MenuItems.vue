@@ -39,8 +39,9 @@ export default {
         .catch(e => console.log(e));
     },
     onNodeSelected(node) {
+      console.log(node.text+ " , "+node.data);
       this.$emit('nodeSelected', node.id)
-      console.log(node.text);
+      
     }
   }
 };

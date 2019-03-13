@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="walletSetMode === true">
     <form @submit="setWallet">
       <input
         type="text"
@@ -9,6 +9,13 @@
       >
       <input type="submit" class="btn" value="Ok" >
     </form>
+    balance : {{walletInfo.balance}}
+    <br>
+    last trx id : {{walletInfo.lastTrxId}}
+    <br>
+  </div>
+  <div v-else>
+    wallet : {{walletInfo.publicKey}}<div @click="enableWalletSetMode" class="temporay">Click On Me To Change wallet</div>
     balance : {{walletInfo.balance}}
     <br>
     last trx id : {{walletInfo.lastTrxId}}
@@ -37,6 +44,9 @@ export default {
         .then(res => (this.walletInfo = res.data))
         .catch(e => console.log(e));
       this.walletSetMode = false;
+    },
+    enableWalletSetMode(){
+        this.walletSetMode = true;
     }
   }
 };
@@ -49,5 +59,8 @@ export default {
 }
 .btn:hover {
   opacity: 1;
+}
+.temporay{
+    color: #f55
 }
 </style>

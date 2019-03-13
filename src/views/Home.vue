@@ -12,6 +12,7 @@
         <p>Some text..</p>
       </div>
     </div>
+    <p class="testHalfHiden">wallet test reminder : 3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi</p>
   </div>
 </template>
 
@@ -28,30 +29,8 @@ export default {
   },
   data() {
     return {
-      games: [
-        {
-          id: 1,
-          team1: "Liverpool",
-          team2: "Manchester Utd",
-          score: "0-0",
-          schedule: "2019-03-01 20h00 GMT"
-        },
-        {
-          id: 2,
-          team1: "Arsenal",
-          team2: "Everton",
-          score: "0-0",
-          schedule: "2019-03-01 20h00 GMT"
-        },
-        {
-          id: 3,
-          team1: "Manchester City",
-          team2: "Chelsea",
-          score: "0-0",
-          schedule: "2019-03-01 20h00 GMT"
-        }
-      ]
-    };
+      games: []
+    }
   },
   methods: {
     selectNode(id) {
@@ -62,7 +41,7 @@ export default {
         .catch(e => console.log(e));
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -88,6 +67,9 @@ export default {
   display: table-cell;
   width: 25%;
   background: #abe;
+}
+.testHalfHiden{
+  color: #555
 }
 ::-webkit-scrollbar {
   -webkit-appearance: none;

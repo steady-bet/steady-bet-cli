@@ -12,6 +12,7 @@
     "bootstrap-vue-treeview": "^1.0.8",
     "liquor-tree": "^0.2.53",
     "vue": "^2.6.6",
+    "vue-awesome": "^3.4.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

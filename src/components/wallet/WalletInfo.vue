@@ -7,7 +7,7 @@
         name="publicKey"
         placeholder="Enter here your public Key..."
       >
-      <input type="submit" class="btn" value="Ok" >
+      <input type="submit" class="btn" value="Ok">
     </form>
     balance : {{walletInfo.balance}}
     <br>
@@ -15,7 +15,13 @@
     <br>
   </div>
   <div v-else>
-    wallet : {{walletInfo.publicKey}}<div @click="enableWalletSetMode" class="temporay">Click On Me To Change wallet</div>
+    <div class="inline">
+      <div class="inline">wallet : {{walletInfo.publicKey}}</div>
+      <div class="inline-red" @click="enableWalletSetMode">
+        &nbsp;<v-icon name="exchange-alt"/>
+      </div>
+    </div>
+    <br>
     balance : {{walletInfo.balance}}
     <br>
     last trx id : {{walletInfo.lastTrxId}}
@@ -25,9 +31,13 @@
 
 <script>
 import axios from "axios";
-
+import "vue-awesome/icons";
+import Icon from "vue-awesome/components/Icon";
 export default {
   name: "WalletInfo",
+  components: {
+    "v-icon": Icon
+  },
   data() {
     return {
       walletSetMode: true,
@@ -45,8 +55,8 @@ export default {
         .catch(e => console.log(e));
       this.walletSetMode = false;
     },
-    enableWalletSetMode(){
-        this.walletSetMode = true;
+    enableWalletSetMode() {
+      this.walletSetMode = true;
     }
   }
 };
@@ -60,7 +70,11 @@ export default {
 .btn:hover {
   opacity: 1;
 }
-.temporay{
-    color: #f55
+.inline-red {
+  display: inline;
+  color: #f55;
+}
+.inline {
+  display: inline;
 }
 </style>

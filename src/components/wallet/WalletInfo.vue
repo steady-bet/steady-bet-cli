@@ -31,7 +31,7 @@
 
 <script>
 import axios from "axios";
-import "vue-awesome/icons";
+import "vue-awesome/icons/exchange-alt";
 import Icon from "vue-awesome/components/Icon";
 export default {
   name: "WalletInfo",

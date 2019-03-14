@@ -7,7 +7,8 @@
         <router-link to="/about">About</router-link>
       </div>
       <div class="column3">
-        <WalletInfo/>
+        <div class="setRight"><WalletInfo/></div>
+        
       </div>
     </div>
   </div>
@@ -44,9 +45,16 @@ export default {
 .column2 {
   display: table-cell;
   width: 40%;
+
 }
 .column3 {
   display: table-cell;
-  text-align: left;
+
+
+}
+.setRight{
+    margin-left: auto;
+  margin-right: 60px;
+  text-align: right;
 }
 </style>

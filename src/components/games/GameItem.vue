@@ -1,7 +1,10 @@
 <template>
   <div class="game-item">
+    <div>
+      <img class="crest crest-left" v-bind:src="game.crestUrlTeam1"/>
+    </div>
     <div class="left">
-      <div>
+      <div>  
         <strong>{{game.team1}}</strong>
       </div>
       <div class="rate-left">33%</div>
@@ -13,6 +16,9 @@
     <div class="right">
       <strong>{{game.team2}}</strong>
       <div class="rate-right">50%</div>
+    </div>
+    <div>
+      <img class="crest crest-right" v-bind:src="game.crestUrlTeam2"/>
     </div>
   </div>
 </template>
@@ -49,6 +55,20 @@ export default {
 }
 .right {
   text-align: left;
+}
+.crest-left {
+  float: left;
+  margin-left: 60px;
+}
+.crest-right {
+  float: right;
+  margin-right: 60px;
+}
+.crest {
+  margin-top: 20px;
+  height: 60px;
+  width: 60px;
+  border: 0;
 }
 .rate-left {
   background: #abe;

@@ -36,7 +36,7 @@ export default {
     selectNode(id) {
       console.log("parent say id is :" + id);
       axios
-        .get("http://localhost:8383/games/"+id)
+        .get("http://localhost:8383/matches/"+id)
         .then(res => (this.games = res.data))
         .catch(e => console.log(e));
     }

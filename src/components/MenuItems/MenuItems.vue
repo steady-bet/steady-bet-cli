@@ -1,5 +1,8 @@
 <template>
+<div>
+  <img class="catlogo" v-bind:src="logoPath"/>
   <tree :data="treeData" :options="treeOptions" @node:selected="onNodeSelected"/>
+</div>
 </template>
 
 <script>
@@ -15,6 +18,7 @@ export default {
   },
   data() {
     return {
+      logoPath: require('../../assets/empty.png'),
       categories: [],
       falseValue: false,
       trueValue: true,
@@ -39,13 +43,22 @@ export default {
         .catch(e => console.log(e));
     },
     onNodeSelected(node) {
-      console.log(node.text+ " , "+node.data);
+      console.log(node.text + " , " + node.data.catFinal);
+      if(!node.hasChildren()) {
+        this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png');
+      } else {
+        this.logoPath = require('../../assets/empty.png');
+      }
       this.$emit('nodeSelected', node.id)
-      
     }
   }
 };
 </script>
 
 <style scoped>
+.catlogo {
+  width: 96px;
+  height: 96px;
+}
+
 </style>

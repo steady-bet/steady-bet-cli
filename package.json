@@ -13,6 +13,7 @@
     "liquor-tree": "^0.2.53",
     "vue": "^2.6.6",
     "vue-awesome": "^3.4.0",
+    "vue-moment-lib": "^1.2.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

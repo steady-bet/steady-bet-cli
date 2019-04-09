@@ -4,6 +4,8 @@ import router from './router'
 
 
 Vue.config.productionTip = false
+Vue.use(VueMomentLib);
+import VueMomentLib from "vue-moment-lib";
 
 new Vue({
   router,

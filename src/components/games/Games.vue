@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-bind:key="game.id" v-for="game in games">
+    <div v-bind:key="game.id" v-for="game in sortedGames">
       <GameItem v-bind:game="game"/>
     </div>
   </div>
@@ -15,6 +15,11 @@ export default {
   props: ["games"],
   data() {
     return {};
+  },
+  computed: {
+    sortedGames: function() {
+      return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule));
+    }
   },
   created() {},
   methods: {}

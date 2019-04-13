@@ -1,6 +1,6 @@
 <template>
   <div class="game-item">
-    <p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").lang("en").format("LLLL") }}</p>
+    <p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").format("LLLL") }}</p>
     <!--<p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").utc() }}</p>-->
     <div class="item-table">
       <div>

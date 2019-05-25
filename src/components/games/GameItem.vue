@@ -6,7 +6,7 @@
       <div>
         <img class="crest crest-left" v-bind:src="game.crestUrlTeam1">
       </div>
-      <div class="left">
+      <div class="left" @click="bet0">
         <div>
           <strong>{{game.team1}}</strong>
         </div>
@@ -24,6 +24,7 @@
         <img class="crest crest-right" v-bind:src="game.crestUrlTeam2">
       </div>
     </div>
+    <a class="linkSM" v-bind:href="linkToSmart">{{game.smartContract}}</a>
   </div>
 </template>
 
@@ -32,13 +33,28 @@
 export default {
   name: "GameItem",
   props: ["game"],
-
+  methods: {
+    bet0(){
+      alert("bet0");
+    }
+  },
+  computed: {
+    linkToSmart() {
+      return 'https://monitor.credits.com/testnet-r4_2/Contract/' + this.game.smartContract;
+    }
+  }
 };
 </script>
 
+
+
+
+
+
+
 <style scoped>
 .game-item {
-  height: 150px;
+  height: 180px;
   margin: 20px auto;
   border: 1px dotted;
   border-radius: 30px;
@@ -117,5 +133,8 @@ export default {
 }
 .rate-right:hover {
   opacity: 0.6;
+}
+.linkSM{
+  font-size: small
 }
 </style>

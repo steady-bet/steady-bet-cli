@@ -76,34 +76,8 @@ export default {
           "http://localhost:8383/wallet/getToken/" + this.walletInfo.publicKey
         )
         .then(res => {
-          var signatureHex = "";
-          var trxId;
-          trxId = res.data.transactionId;
-
-          var signature = nacl.sign.detached(
-            Buffer.from(res.data.hexaToSign, "hex"),
-            keyByte
-          );
-          var signatureBuff = new Buffer(signature);
-          signatureHex = signatureBuff.toString("hex");
-          axios
-            .post(
-              "http://localhost:8383/wallet/getToken/" +
-                this.walletInfo.publicKey,
-              { signature: signatureHex, id: trxId },
-              {
-                headers: {
-                  "Content-Type": "application/json"
-                }
-              }
-            )
-            .then(res2 => {
-              console.log("token amount : "+res2.data);
-              this.tokenTBTAmount = res2.data;
+              this.tokenTBTAmount = res.data;
               this.$store.commit('updateWalletToken',this.tokenTBTAmount);
-
-            })
-            .catch(e => console.log(e));
         })
         .catch(e => console.log(e));
 

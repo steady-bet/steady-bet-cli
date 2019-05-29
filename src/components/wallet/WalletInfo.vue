@@ -15,20 +15,19 @@
     <br>
     last trx id : {{walletInfo.lastTrxId}}
     <br>
-
   </div>
   <div v-else>
     <div class="inline">
-      <div class="inline">wallet : {{walletInfo.publicKey}}</div>
+      <div class="inline">wallet : {{ $store.getters.walletData.address }}</div>
       <div class="inline-red" @click="enableWalletSetMode">
         &nbsp;
         <v-icon name="exchange-alt"/>
       </div>
     </div>
     <br>
-    balance : {{walletInfo.balance}}
+    balance : {{ $store.getters.walletData.csBalance }}
     <br>
-    TBT Token : {{tokenTBTAmount}}    
+    TBT Token : {{ $store.getters.walletData.tokenBalance }}
     <br>
     last trx id : {{walletInfo.lastTrxId}}
     <br>
@@ -65,8 +64,12 @@ export default {
 
       axios
         .get("http://localhost:8383/wallet/" + this.walletInfo.publicKey)
-        .then(res => (this.walletInfo = res.data))
-        .catch(e => console.log(e));
+        .then(res => {
+          this.walletInfo = res.data;
+          console.log(this.walletInfo.balance);
+          this.$store.commit('changeWallet',this.walletInfo.publicKey);
+          this.$store.commit('updateBalance',this.walletInfo.balance);
+        }).catch(e => console.log(e));
 
       axios
         .get(
@@ -75,8 +78,6 @@ export default {
         .then(res => {
           var signatureHex = "";
           var trxId;
-          console.log(res.data);
-          console.log(res.data.hexaToSign);
           trxId = res.data.transactionId;
 
           var signature = nacl.sign.detached(
@@ -85,7 +86,6 @@ export default {
           );
           var signatureBuff = new Buffer(signature);
           signatureHex = signatureBuff.toString("hex");
-          console.log("signature : " + signatureHex);
           axios
             .post(
               "http://localhost:8383/wallet/getToken/" +
@@ -100,6 +100,8 @@ export default {
             .then(res2 => {
               console.log("token amount : "+res2.data);
               this.tokenTBTAmount = res2.data;
+              this.$store.commit('updateWalletToken',this.tokenTBTAmount);
+
             })
             .catch(e => console.log(e));
         })

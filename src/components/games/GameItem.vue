@@ -44,7 +44,8 @@ export default {
       selectedBet: {
         team: -1,
         teamName: "",
-        smartContract: ""
+        smartContract: "",
+        interval: null
       },
       matchBets: []
     };
@@ -72,18 +73,18 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
-    bet0() {
-      alert("bet0");
+    loadBets() {
+      axios
+        .get(
+          "http://localhost:8383/matches/getBetsOnScheduleMatch/" +
+            this.game.smartContract
+        )
+        .then(res => {
+          this.matchBets = res.data;
+          console.log(this.matchBets.totalHome);
+        })
+        .catch(e => console.log(e));
     }
-  },
-  mounted() {
-    axios
-      .get("http://localhost:8383/matches/getBetsOnScheduleMatch/" + this.game.smartContract)
-      .then(res => {
-        this.matchBets = res.data;
-        console.log(this.matchBets.totalHome);
-      })
-      .catch(e => console.log(e));
   },
   computed: {
     linkToSmart() {
@@ -92,6 +93,18 @@ export default {
         this.game.smartContract
       );
     }
+  },
+  mounted() {
+    this.loadBets();
+    this.interval = setInterval(
+      function() {
+        this.loadBets();
+      }.bind(this),
+      10000
+    );
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   }
 };
 </script>

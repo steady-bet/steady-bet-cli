@@ -3,14 +3,20 @@
     <div class="modal">
       <form autocomplete="false" @submit="betIt">
         <header class="modal-header">
-          <slot name="header">Let's bet for {{selectedBet.teamName}} !!!</slot>
+          <slot name="header">
+            Let's bet for {{selectedBet.teamName}} !!!
+            <br>
+            <p v-if="betValidated" class="success-msg">Success !!!</p>
+            <p v-if="betError" class="error-msg">Error bet is canceled</p>
+          </slot>
         </header>
         <section class="modal-body">
           <slot name="body">
             Token available : {{ $store.getters.walletData.tokenBalance }} TBT
             <br>
             <br>
-            <input id="amountToBet" v-model="amountToBet" type="text" placeholder="0 TBT">
+            <input id="amountToBet" v-model="amountToBet" type="number" :min="25" :max="$store.getters.walletData.tokenBalance" >
+            <br>
             <br>
             <input
               id="privateKey"
@@ -22,7 +28,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="betIt">Bet !</button>
+            <button v-if="displayBetButton" type="button" class="btn-green" @click="betIt">Bet !</button>
             <button type="button" class="btn-red" @click="close">Cancel</button>
           </slot>
         </footer>
@@ -40,14 +46,31 @@ export default {
   props: ["selectedBet"],
   data() {
     return {
-      amountToBet: 0,
-      privateKey: ""
+      amountToBet: 50,
+      privateKey: "",
+      betValidated: false,
+      betError: false,
+      displayBetButton: true
     };
   },
   methods: {
     close() {
-      this.amountToBet = null;
+      this.amountToBet = 50;
+      this.privateKey= '';
       this.$emit("close");
+      this.displayBetButton= true;
+      this.betValidated= false;
+      this.betError= false;
+    },
+    setErrorMsg() {
+      this.displayBetButton= true;
+      this.betValidated= false;
+      this.betError= true;
+    },
+    setSuccessMsg() {
+      this.displayBetButton= false;
+      this.betValidated= true;
+      this.betError= false;
     },
     betIt() {
       console.log(
@@ -101,11 +124,26 @@ export default {
               console.log("result transaction  : " + res2.data);
               this.amountToBet = null;
               this.privateKey = null;
-              this.$emit("close");
+              this.setSuccessMsg();
+              if(res2.data == true){
+                this.setSuccessMsg();
+              } else {
+                this.setErrorMsg();
+              }
             })
-            .catch(e => console.log(e));
+            .catch(e => {
+              console.log(e);
+              this.privateKey = null;
+              this.amountToBet = null;
+              this.setErrorMsg();
+            });
         })
-        .catch(e => console.log(e));
+        .catch(e => {
+          console.log(e);
+          this.privateKey = null;
+          this.amountToBet = null;
+          this.setErrorMsg();
+        });
     }
   }
 };
@@ -155,26 +193,25 @@ export default {
   padding: 20px 10px;
 }
 
-.btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4aae9b;
-  background: transparent;
-}
 
 .btn-green {
   color: white;
   background: #4aae9b;
   border: 1px solid #4aae9b;
   border-radius: 2px;
+  margin-right: 5px;
+  height: 25px;
 }
 .btn-red {
   color: white;
   background: rgb(172, 36, 36);
   border: 1px solid #4aae9b;
   border-radius: 2px;
+}
+.success-msg{
+  color: green
+}
+.error-msg{
+  color: red
 }
 </style>

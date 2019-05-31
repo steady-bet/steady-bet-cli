@@ -100,7 +100,7 @@ export default {
       function() {
         this.loadBets();
       }.bind(this),
-      10000
+      20000
     );
   },
   beforeDestroy() {

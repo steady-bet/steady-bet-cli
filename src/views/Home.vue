@@ -2,7 +2,7 @@
   <div class="home">
     <div class="col-container">
       <div class="column1">
-        <MenuItems @nodeSelected="(id)=>selectNode(id)"/>
+        <MenuItems @nodeSelected="(id,hasChildren)=>selectNode(id, hasChildren)"/>
       </div>
       <div class="column2">
         <Games v-bind:games="games"/>
@@ -30,18 +30,22 @@ export default {
   data() {
     return {
       games: []
-    }
+    };
   },
   methods: {
-    selectNode(id) {
-      console.log("parent say id is :" + id);
-      axios
-        .get("http://localhost:8383/matches/"+id)
-        .then(res => (this.games = res.data))
-        .catch(e => console.log(e));
+    selectNode(id, hasChildren) {
+      console.log(
+        "parent say id is :" + id + " and hasChildren = " + hasChildren
+      );
+      if (!hasChildren) {
+        axios
+          .get("http://localhost:8383/matches/" + id)
+          .then(res => (this.games = res.data))
+          .catch(e => console.log(e));
+      }
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -68,8 +72,8 @@ export default {
   width: 25%;
   background: #abe;
 }
-.testHalfHiden{
-  color: #555
+.testHalfHiden {
+  color: #555;
 }
 ::-webkit-scrollbar {
   -webkit-appearance: none;

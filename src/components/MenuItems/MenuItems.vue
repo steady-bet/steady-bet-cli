@@ -49,7 +49,8 @@ export default {
       } else {
         this.logoPath = require('../../assets/empty.png');
       }
-      this.$emit('nodeSelected', node.id)
+      console.log("test children="+node.hasChildren());
+      this.$emit('nodeSelected', node.id, node.hasChildren())
     }
   }
 };

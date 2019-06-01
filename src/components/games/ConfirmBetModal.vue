@@ -5,7 +5,10 @@
         <header class="modal-header">
           <slot name="header">
             Let's bet for {{selectedBet.teamName}} !!!
-            <br>
+            <div class="wait-msg">
+              <br>
+              <span v-if="waiting" class="setborder">Wait for confirmation</span>
+            </div>
             <p v-if="betValidated" class="success-msg">Success !!!</p>
             <p v-if="betError" class="error-msg">Error bet is canceled</p>
           </slot>
@@ -13,23 +16,31 @@
         <section class="modal-body">
           <slot name="body">
             Token available : {{ $store.getters.walletData.tokenBalance }} TBT
-            <br>
-            <br>
-            <input id="amountToBet" v-model="amountToBet" type="number" :min="25" :max="$store.getters.walletData.tokenBalance" >
-            <br>
-            <br>
-            <input
-              id="privateKey"
-              v-model="privateKey"
-              type="text"
-              placeholder="privateKey needed to sign and confirm transaction"
-            >
+            <div v-if="!betValidated">
+              <br>
+              <input
+                id="amountToBet"
+                v-model="amountToBet"
+                type="number"
+                :min="25"
+                :max="$store.getters.walletData.tokenBalance"
+              >
+              <br>
+              <br>
+              <input
+                id="privateKey"
+                v-model="privateKey"
+                type="text"
+                placeholder="privateKey needed to sign and confirm transaction"
+              >
+            </div>
           </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">
             <button v-if="displayBetButton" type="button" class="btn-green" @click="betIt">Bet !</button>
-            <button type="button" class="btn-red" @click="close">Cancel</button>
+            <button v-if="!betValidated" type="button" class="btn-red" @click="close">Cancel</button>
+            <button v-if="betValidated" type="button" class="btn-green" @click="close">Ok</button>
           </slot>
         </footer>
       </form>
@@ -44,39 +55,47 @@ import bs58 from "bs58";
 export default {
   name: "confirmBetModal",
   props: ["selectedBet"],
+  components: {},
   data() {
     return {
       amountToBet: 50,
       privateKey: "",
       betValidated: false,
       betError: false,
+      waiting: false,
       displayBetButton: true
     };
   },
   methods: {
     close() {
       this.amountToBet = 50;
-      this.privateKey= '';
+      this.privateKey = "";
       this.$emit("close");
-      this.displayBetButton= true;
-      this.betValidated= false;
-      this.betError= false;
+      this.displayBetButton = true;
+      this.betValidated = false;
+      this.betError = false;
+      this.waiting = false;
+    },
+    setWait() {
+      this.waiting = true;
     },
     setErrorMsg() {
-      this.displayBetButton= true;
-      this.betValidated= false;
-      this.betError= true;
+      this.displayBetButton = true;
+      this.betValidated = false;
+      this.betError = true;
+      this.waiting = false;
     },
     setSuccessMsg() {
-      this.displayBetButton= false;
-      this.betValidated= true;
-      this.betError= false;
+      this.displayBetButton = false;
+      this.betValidated = true;
+      this.betError = false;
+      this.waiting = false;
     },
     betIt() {
       console.log(
         "do bet !!! " + this.amountToBet + ", " + this.$props.selectedBet.team
       );
-
+      this.setWait();
       axios
         .get(
           "http://localhost:8383/matches/getNewMatchBetToSign/" +
@@ -125,7 +144,7 @@ export default {
               this.amountToBet = null;
               this.privateKey = null;
               this.setSuccessMsg();
-              if(res2.data == true){
+              if (res2.data == true) {
                 this.setSuccessMsg();
               } else {
                 this.setErrorMsg();
@@ -168,7 +187,7 @@ export default {
   box-shadow: 2px 2px 20px 1px;
   overflow-x: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .modal-header,
@@ -178,6 +197,7 @@ export default {
 }
 
 .modal-header {
+  flex-direction: column;
   border-bottom: 1px solid #eeeeee;
   color: #4aae9b;
   justify-content: space-between;
@@ -193,7 +213,6 @@ export default {
   padding: 20px 10px;
 }
 
-
 .btn-green {
   color: white;
   background: #4aae9b;
@@ -208,10 +227,13 @@ export default {
   border: 1px solid #4aae9b;
   border-radius: 2px;
 }
-.success-msg{
-  color: green
+.success-msg {
+  color: green;
 }
-.error-msg{
-  color: red
+.error-msg {
+  color: red;
+}
+.wait-msg {
+  color: orangered;
 }
 </style>

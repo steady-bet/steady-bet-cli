@@ -89,6 +89,9 @@ export default {
       this.walletInfo.balance="";
       this.walletInfo.lastTrxId=null;
       this.tokenTBTAmount= "";
+      this.$store.commit('changeWallet',null);
+      this.$store.commit('updateBalance',null);
+      this.$store.commit('updateWalletToken',null);
     }
   }
 };

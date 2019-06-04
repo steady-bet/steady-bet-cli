@@ -8,8 +8,7 @@
         <Games v-bind:games="games"/>
       </div>
       <div class="column3">
-        <h2>Column 3</h2>
-        <p>Some text..</p>
+        <FutureBetsSummary v-bind:myFutureBets="myFutureBets"/>
       </div>
     </div>
     <p class="testHalfHiden">wallet test reminder : 3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi</p>
@@ -20,16 +19,19 @@
 // @ is an alias to /src
 import MenuItems from "@/components/MenuItems/MenuItems.vue";
 import Games from "@/components/games/Games.vue";
+import FutureBetsSummary from "@/components/userBets/FutureBetsSummary.vue"
 import axios from "axios";
 export default {
   name: "home",
   components: {
     MenuItems,
-    Games
+    Games,
+    FutureBetsSummary
   },
   data() {
     return {
-      games: []
+      games: [],
+      myFutureBets: []
     };
   },
   methods: {

@@ -45,6 +45,8 @@ export default {
         team: -1,
         teamName: "",
         smartContract: "",
+        matchDate: null,
+        matchName: null,
         interval: null
       },
       matchBets: []
@@ -53,6 +55,8 @@ export default {
   methods: {
     showModal() {
       this.selectedBet.smartContract = this.game.smartContract;
+      this.selectedBet.matchDate = this.game.schedule;
+      this.selectedBet.matchName = this.game.team1+" - "+this.game.team2;
       this.isModalVisible = true;
     },
     showModal0() {
@@ -62,7 +66,7 @@ export default {
     },
     showModal1() {
       this.selectedBet.team = 1;
-      this.selectedBet.teamName = "a draw";
+      this.selectedBet.teamName = "draw";
       this.showModal();
     },
     showModal2() {

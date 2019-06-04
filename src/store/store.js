@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     walletData: {
-      address: '',
+      address: null,
       csBalance: 0,
       tokenBalance: 0
     }

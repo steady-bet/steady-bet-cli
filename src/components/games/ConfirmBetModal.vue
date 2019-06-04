@@ -131,7 +131,10 @@ export default {
                 signature: signatureHex,
                 id: trxId,
                 selectedTeam: this.$props.selectedBet.team,
-                amount: this.amountToBet
+                amount: this.amountToBet,
+                matchDateUtc: this.$props.selectedBet.matchDate,
+                selectedTeamName: this.$props.selectedBet.teamName,
+                matchName: this.$props.selectedBet.matchName
               },
               {
                 headers: {

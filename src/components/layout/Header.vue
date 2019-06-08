@@ -7,29 +7,28 @@
         <router-link to="/about">About</router-link>
       </div>
       <div class="column3">
-        <div class="setRight"><WalletInfo/></div>
-        
+        <div class="setRight"><WalletInfo/></div> 
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import WalletInfo from "@/components/wallet/WalletInfo.vue";
+import WalletInfo from '@/components/wallet/WalletInfo.vue'
 
 export default {
-  name: "Header",
+  name: 'Header',
   components: {
     WalletInfo
   },
-  data() {
+  data () {
     return {
       walletInfo: {
-        publicKey: ""
+        publicKey: ''
       }
-    };
+    }
   },
-  created() {}
+  created () {}
 };
 </script>
 

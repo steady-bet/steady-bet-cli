@@ -1,12 +1,12 @@
 import Vue from 'vue'
+import VueMomentLib from 'vue-moment-lib'
 import App from './App.vue'
 import router from './router'
 
+import { store } from './_store'
 
 Vue.config.productionTip = false
-Vue.use(VueMomentLib);
-import VueMomentLib from "vue-moment-lib";
-import { store } from './store/store'
+Vue.use(VueMomentLib)
 
 new Vue({
   store,

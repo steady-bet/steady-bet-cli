@@ -50,7 +50,7 @@ export default {
 }
 .col-container {
   display: table; /* Make the container element behave like a table */
-  width: 80%; /* Set full-width to expand the whole page */
+  width: 100%; /* Set full-width to expand the whole page */
   margin-left: auto;
   margin-right: auto;
 }

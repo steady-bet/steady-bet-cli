@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { multiModal } from './modules/multiModal'
 import { wallet } from './modules/wallet'
 
 Vue.use(Vuex)
@@ -9,6 +10,7 @@ Vue.use(Vuex)
 // }
 
 const modules = {
+  multiModal,
   wallet
 }
 

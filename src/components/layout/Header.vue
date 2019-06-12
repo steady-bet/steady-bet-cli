@@ -1,15 +1,27 @@
 <template>
-  <div class="header">
-    <div class="col-container">
-      <div class="column1">SteadyBet</div>
-      <div class="column2">
-        <router-link to="/">Bet On Events</router-link> |
-        <router-link to="/about">About</router-link>
-      </div>
-      <div class="column3">
-        <div class="setRight"><WalletInfo/></div> 
-      </div>
-    </div>
+  <div id="header">
+    <h1>SteadyBet</h1>
+    <nav id="navbar" class="hnav">
+      <ul>
+        <li>
+          <router-link to="/">Bet On Events</router-link>|
+        </li>
+        <li>
+          <router-link to="/about">About</router-link>
+        </li>
+      </ul>
+    </nav>
+    <nav id="authentication" class="hnav">
+      <li>
+        <button id="show-modal-login" class="navbar-show-modal">Login</button>
+      </li>
+      <li>
+        <button id="show-modal-register" class="navbar-show-modal">Register</button>
+      </li>
+      <li>
+        <wallet-info/>
+      </li>
+    </nav>
   </div>
 </template>
 
@@ -29,32 +41,41 @@ export default {
     }
   },
   created () {}
-};
+}
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "../../assets/style";
 
-.col-container {
-  display: table;
-  width: 100%;
+#header {
+  height: 100px;
+  background: #000 url("../../assets/banner.jpg") top left no-repeat;
 }
-.column1 {
-  display: table-cell;
-  width: 10%;
+#header h1 {
+  float: left;
+  margin: 25px 0px 0px 180px;
 }
-.column2 {
-  display: table-cell;
-  width: 40%;
-
+.hnav {
+  margin: 0;
+  padding: 1em 0.5em 0.1em 0;
+  list-style-type: none;
 }
-.column3 {
-  display: table-cell;
-
-
+.hnav li {
+  display: inline;
 }
-.setRight{
-    margin-left: auto;
-  margin-right: 60px;
-  text-align: right;
+.hnav li a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 120%;
+  color: #000;
+}
+.hnav li a:hover {
+  background: yellow;
+}
+nav#navbar {
+  float: left;
+}
+nav#authentication {
+  float: right;
 }
 </style>

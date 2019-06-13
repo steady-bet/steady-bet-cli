@@ -18,27 +18,27 @@
 
 <script>
 // @ is an alias to /src
-import MenuItems from "@/components/MenuItems/MenuItems.vue";
-import Games from "@/components/games/Games.vue";
-import axios from "axios";
+import MenuItems from '@/components/MenuItems/MenuItems.vue'
+import Games from '@/components/games/Games.vue'
+import axios from 'axios'
 export default {
-  name: "home",
+  name: 'home',
   components: {
     MenuItems,
     Games
   },
-  data() {
+  data () {
     return {
       games: []
     }
   },
   methods: {
-    selectNode(id) {
-      console.log("parent say id is :" + id);
+    selectNode (id) {
+      console.log('parent say id is :' + id)
       axios
-        .get("http://localhost:8383/matches/"+id)
+        .get('http://localhost:8383/matches/' + id)
         .then(res => (this.games = res.data))
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
     }
   }
 }

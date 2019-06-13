@@ -9,12 +9,13 @@
       >
       <input type="submit" class="btn" value="Ok">
     </form>
-    balance : {{walletInfo.balance}}
-    <br>
-    TBT Token : {{tokenTBTAmount}}
-    <br>
-    last trx id : {{walletInfo.lastTrxId}}
-    <br>
+    <div class="balance">
+      balance : {{walletInfo.balance}}
+      <br>
+      TBT Token : {{tokenTBTAmount}}
+      <!--<br>
+      last trx id : {{walletInfo.lastTrxId}}-->
+    </div>
   </div>
   <div v-else>
     <div class="inline">
@@ -24,77 +25,70 @@
         <v-icon name="exchange-alt"/>
       </div>
     </div>
-    <br>
-    balance : {{ $store.getters.walletData.csBalance }}
-    <br>
-    TBT Token : {{ $store.getters.walletData.tokenBalance }}
-    <br>
-    last trx id : {{walletInfo.lastTrxId}}
-    <br>
+    <div class="balance">
+      balance : {{ $store.getters.walletData.csBalance }}
+      <br>
+      TBT Token : {{ $store.getters.walletData.tokenBalance }}
+      <!--<br>
+      last trx id : {{walletInfo.lastTrxId}}-->
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import "vue-awesome/icons/exchange-alt";
-import Icon from "vue-awesome/components/Icon";
-import nacl from "tweetnacl";
-import bs58 from "bs58";
+import axios from 'axios'
+import 'vue-awesome/icons/exchange-alt'
+import Icon from 'vue-awesome/components/Icon'
+// import nacl from 'tweetnacl'
+// import bs58 from 'bs58'
 
 export default {
-  name: "WalletInfo",
+  name: 'WalletInfo',
   components: {
-    "v-icon": Icon
+    'v-icon': Icon
   },
-  data() {
+  data () {
     return {
       walletSetMode: true,
       walletInfo: {
-        publicKey: "",
+        publicKey: ''
       },
-      tokenTBTAmount: ""
-    };
+      tokenTBTAmount: ''
+    }
   },
   methods: {
-    setWallet(e) {
-      e.preventDefault();
+    setWallet (e) {
+      e.preventDefault()
+      /*
       var keyByte = bs58.decode(
-        "YpWzyv9PPBZhHSXMcChoaxpGtbXX4vPHCNqpDFbz2vg5gPSH1Xz35ZYftgp8EvJocRp7wU4KqjDDMBLFkZv7rSB"
-      );
-
+        'YpWzyv9PPBZhHSXMcChoaxpGtbXX4vPHCNqpDFbz2vg5gPSH1Xz35ZYftgp8EvJocRp7wU4KqjDDMBLFkZv7rSB'
+      )
+      */
       axios
-        .get("http://localhost:8383/wallet/" + this.walletInfo.publicKey)
+        .get('http://localhost:8383/wallet/' + this.walletInfo.publicKey)
         .then(res => {
-          this.walletInfo = res.data;
-          console.log(this.walletInfo.balance);
-          this.$store.commit('changeWallet',this.walletInfo.publicKey);
-          this.$store.commit('updateBalance',this.walletInfo.balance);
-        }).catch(e => console.log(e));
+          this.walletInfo = res.data
+          console.log(this.walletInfo.balance)
+          this.$store.commit('changeWallet', this.walletInfo.publicKey)
+          this.$store.commit('updateBalance', this.walletInfo.balance)
+        }).catch(e => console.log(e))
 
-      axios
-        .get(
-          "http://localhost:8383/wallet/getToken/" + this.walletInfo.publicKey
-        )
+      axios.get('http://localhost:8383/wallet/getToken/' + this.walletInfo.publicKey)
         .then(res => {
-              this.tokenTBTAmount = res.data;
-              this.$store.commit('updateWalletToken',this.tokenTBTAmount);
+          this.tokenTBTAmount = res.data
+          this.$store.commit('updateWalletToken', this.tokenTBTAmount)
         })
-        .catch(e => console.log(e));
-
-
-      this.walletSetMode = false;
+        .catch(e => console.log(e))
+      this.walletSetMode = false
     },
-    enableWalletSetMode() {
-      this.walletSetMode = true;
-      this.walletInfo.balance="";
-      this.walletInfo.lastTrxId=null;
-      this.tokenTBTAmount= "";
-      this.$store.commit('changeWallet',null);
-      this.$store.commit('updateBalance',null);
-      this.$store.commit('updateWalletToken',null);
+    enableWalletSetMode () {
+      this.walletSetMode = true
+      this.walletInfo.balance = ''
+      this.walletInfo.lastTrxId = null
+      this.tokenTBTAmount = ''
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -111,5 +105,9 @@ export default {
 }
 .inline {
   display: inline;
+}
+.balance {
+  color: yellow;
+  font-weight: bold;
 }
 </style>

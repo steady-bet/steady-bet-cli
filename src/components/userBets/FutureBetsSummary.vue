@@ -28,12 +28,12 @@ export default {
   },
   methods: {
     loadFutureBets() {
-      if (this.$store.getters.walletData.address != null) {
-        console.log(this.$store.getters.walletData.address)
+      if (this.$store.getters['wallet/walletData'].address != null) {
+        console.log(this.$store.getters['wallet/walletData'].address)
         axios
           .get(
             "http://localhost:8383/user/" +
-              this.$store.getters.walletData.address +
+              this.$store.getters['wallet/walletData'].address +
               "/getUserFutureBets"
           )
           .then(res => {
@@ -49,7 +49,7 @@ export default {
       function() {
         this.loadFutureBets();
       }.bind(this),
-      3000
+      120000
     );
   }
 };

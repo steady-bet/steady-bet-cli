@@ -15,7 +15,7 @@
         </header>
         <section class="modal-body">
           <slot name="body">
-            Token available : {{ $store.getters.walletData.tokenBalance }} TBT
+            Token available : {{ $store.getters['wallet/walletData'].tokenBalance }} TBT
             <div v-if="!betValidated">
               <br>
               <input
@@ -23,7 +23,7 @@
                 v-model="amountToBet"
                 type="number"
                 :min="25"
-                :max="$store.getters.walletData.tokenBalance"
+                :max="$store.getters['wallet/walletData'].tokenBalance"
               >
               <br>
               <br>
@@ -101,7 +101,7 @@ export default {
           "http://localhost:8383/matches/getNewMatchBetToSign/" +
             this.$props.selectedBet.smartContract +
             "?publicAddress=" +
-            this.$store.getters.walletData.address +
+            this.$store.getters['wallet/walletData'].address +
             "&selectedTeam=" +
             this.$props.selectedBet.team +
             "&amount=" +
@@ -127,7 +127,7 @@ export default {
               "http://localhost:8383/matches/sendBetSigned/" +
                 this.$props.selectedBet.smartContract,
               {
-                publicAddress: this.$store.getters.walletData.address,
+                publicAddress: this.$store.getters['wallet/walletData'].address,
                 signature: signatureHex,
                 id: trxId,
                 selectedTeam: this.$props.selectedBet.team,

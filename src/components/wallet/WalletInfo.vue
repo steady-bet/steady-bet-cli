@@ -19,16 +19,16 @@
   </div>
   <div v-else>
     <div class="inline">
-      <div class="inline">wallet : {{ $store.getters.walletData.address }}</div>
+      <div class="inline-yellow">wallet : {{ this.$store.getters['wallet/walletData'].address }}</div>
       <div class="inline-red" @click="enableWalletSetMode">
         &nbsp;
         <v-icon name="exchange-alt"/>
       </div>
     </div>
     <div class="balance">
-      balance : {{ $store.getters.walletData.csBalance }}
+      balance : {{ this.$store.getters['wallet/walletData'].csBalance }}
       <br>
-      TBT Token : {{ $store.getters.walletData.tokenBalance }}
+      TBT Token : {{ this.$store.getters['wallet/walletData'].tokenBalance }}
       <!--<br>
       last trx id : {{walletInfo.lastTrxId}}-->
     </div>
@@ -41,6 +41,7 @@ import 'vue-awesome/icons/exchange-alt'
 import Icon from 'vue-awesome/components/Icon'
 // import nacl from 'tweetnacl'
 // import bs58 from 'bs58'
+// import { mapMutations } from 'vuex'
 
 export default {
   name: 'WalletInfo',
@@ -69,14 +70,14 @@ export default {
         .then(res => {
           this.walletInfo = res.data
           console.log(this.walletInfo.balance)
-          this.$store.commit('changeWallet', this.walletInfo.publicKey)
-          this.$store.commit('updateBalance', this.walletInfo.balance)
+          this.$store.commit('wallet/changeWallet', this.walletInfo.publicKey)
+          this.$store.commit('wallet/updateBalance', this.walletInfo.balance)
         }).catch(e => console.log(e))
 
       axios.get('http://localhost:8383/wallet/getToken/' + this.walletInfo.publicKey)
         .then(res => {
           this.tokenTBTAmount = res.data
-          this.$store.commit('updateWalletToken', this.tokenTBTAmount)
+          this.$store.commit('wallet/updateWalletToken', this.tokenTBTAmount)
         })
         .catch(e => console.log(e))
       this.walletSetMode = false
@@ -105,6 +106,11 @@ export default {
 }
 .inline {
   display: inline;
+}
+.inline-yellow {
+  display: inline;
+  color: yellow;
+  font-weight: bold;
 }
 .balance {
   color: yellow;

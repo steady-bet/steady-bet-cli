@@ -13,25 +13,32 @@
     </nav>
     <nav id="authentication" class="hnav">
       <li>
-        <button id="show-modal-login" class="navbar-show-modal">Login</button>
+        <button id="show-modal-login" class="navbar-show-modal" @click="showModalLogin">Login</button>
       </li>
       <li>
-        <button id="show-modal-register" class="navbar-show-modal">Register</button>
+        <button id="show-modal-register" class="navbar-show-modal" @click="showModalRegister">Register</button>
       </li>
       <li>
         <wallet-info/>
       </li>
     </nav>
+    <multi-modal-auth-view/>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import WalletInfo from '@/components/wallet/WalletInfo.vue'
+import MultiModalAuthView from '@/views/MultiModalAuthView.vue'
 
 export default {
   name: 'Header',
   components: {
-    WalletInfo
+    WalletInfo,
+    MultiModalAuthView
+  },
+  methods: {
+    ...mapActions('multiModal', ['showModalLogin', 'showModalRegister'])
   },
   data () {
     return {

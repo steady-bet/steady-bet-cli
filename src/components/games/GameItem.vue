@@ -98,7 +98,7 @@ export default {
       );
     }
   },
-  mounted() {
+  mounted() {    
     this.loadBets();
     this.interval = setInterval(
       function() {

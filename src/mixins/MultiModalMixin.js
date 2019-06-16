@@ -2,6 +2,6 @@ import { mapMutations } from 'vuex'
 
 export default {
   methods: {
-    ...mapMutations('multiModal', ['hideModal'])
+    ...mapMutations('multiModal', ['hideModal', 'setModal'])
   }
 }

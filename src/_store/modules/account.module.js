@@ -1,5 +1,5 @@
 import { userService } from '../../_services'
-import { router } from '../../router'
+import router from '../../router'
 
 // try to get user from local storage
 const user = JSON.parse(localStorage.getItem('user'))

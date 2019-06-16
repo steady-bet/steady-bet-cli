@@ -1,4 +1,3 @@
-// import axios from 'axios'
 import { restHttp } from './axios.service'
 import { authHeader } from '../_helpers'
 
@@ -14,17 +13,14 @@ export const userService = {
 
 function login (username, password) {
   console.log('*** login : username=' + username)
-  const requestOptions = {
-    headers: { 'Content-Type': 'application/json' }
-  }
-  return restHttp.post('users/authenticate', JSON.stringify({ username, password }), requestOptions)
+  return restHttp.post('user/authenticate', JSON.stringify({ username, password }))
     .then(function (response) {
       let user = response.data
-      console.log('user ' + user.userName + ' found')
+      console.log('user ' + user.email + ' found')
       // console.log(JSON.stringify(user))
       // login successful if there's a jwt token in the response
-      if (user.token) {
-        console.log('user ' + username + ' has a token ' + user.token)
+      if (user.jwToken) {
+        console.log('user ' + user.email + ' has a token ' + user.jwToken)
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user))
       }
@@ -46,18 +42,19 @@ function logout () {
 }
 
 function register (user) {
-  return restHttp.post('users/register', JSON.stringify({ user }))
-    .then(function (response) {
-      console.log(response)
+  console.log('Send user to register : user = ' + JSON.stringify(user))
+  return restHttp.post('/user/register', JSON.stringify(user))
+    .then(response => {
+      console.log(response.data)
       // login successful if there's a jwt token in the response
-      let user = response.data && response.data.user
-      if (user.token) {
+      let user = response.data
+      if (user && user.jwToken) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user))
       }
       return user
     })
-    .catch(function (response) {
+    .catch(response => {
       console.log(response)
       return Promise.reject(response.statusText)
     })
@@ -68,7 +65,7 @@ function getById (id) {
     method: 'GET',
     headers: authHeader()
   }
-  return restHttp.get(`users/${id}`, requestOptions)
+  return restHttp.get(`user/${id}`, requestOptions)
     .then(function (response) {
       // TODO
       console.log(response)

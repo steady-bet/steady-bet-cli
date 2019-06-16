@@ -3,73 +3,88 @@
     <div class="modal__bg" />
     <div class="modal__content">
       <h2>Login</h2>
-      <!--
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="email">Email</label>
           <input
             type="text"
-            v-model="username"
-            name="username"
+            size="30"
+            v-model="email"
+            v-validate="'required|email'"
+            name="email"
             class="form-control"
-            :class="{ 'is-invalid': submitted && !username }"
-          >
-          <div
-            v-show="submitted && !username"
-            class="invalid-feedback"
-          >
-            Username is required
-          </div>
+            :class="{ 'is-invalid': submitted && errors.has('email') }"
+          />
+          <div v-show="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
         </div>
         <div class="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
+            size="30"
             v-model="password"
+            v-validate="{ required: true, min: 6 }"
             name="password"
             class="form-control"
-            :class="{ 'is-invalid': submitted && !password }"
-          >
-          <div
-            v-show="submitted && !password"
-            class="invalid-feedback"
-          >
-            Password is required
-          </div>
+            :class="{ 'is-invalid': submitted && errors.has('password') }"
+          />
+          <div v-show="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
         </div>
         <div class="form-group">
-          <button
-            class="btn btn-primary"
-            :disabled="status.loggingIn"
-          >
-            Login
-          </button>
+          <button class="btn btn-primary" :disabled="status.loggingIn">Login</button>
+          <!--
           <img
             v-show="status.loggingIn"
             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-          >
+          />
+          -->
+          <!--
           <router-link
             to="/register"
             class="btn btn-link"
-          >
+          />
             Register
           </router-link>
+          -->
+          <button class="btn btn-primary" @click="hideModal">Close</button>
         </div>
       </form>
-      -->
-      <button @click="hideModal">closeModal</button>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import MultiModalMixin from '../mixins/MultiModalMixin'
+import { mapMutations, mapState, mapActions } from 'vuex'
+import MultiModalMixin from '../mixins/MultiModalMixin'
 
-  export default {
-    name: 'Login',
-    mixins: [MultiModalMixin]
+export default {
+  name: 'Login',
+  mixins: [MultiModalMixin],
+  data () {
+    return {
+      email: '',
+      password: '',
+      submitted: false
+    }
+  },
+  computed: {
+    ...mapState('account', ['status'])
+  },
+  created () {
+    // reset login status
+    this.logout()
+  },
+  methods: {
+    ...mapActions('account', ['login', 'logout']),
+    handleSubmit (e) {
+      this.submitted = true
+      const { email, password } = this
+      if (email && password) {
+        this.login({ email, password })
+      }
+    }
   }
+}
 </script>
 
 <style scoped>
@@ -82,11 +97,14 @@
     vertical-align:middle
 }
 .invalid-feedback{
-    display:none;
+    /*display:none;*/
     width:100%;
     margin-top:.25rem;
-    font-size:80%;
+    font-size:70%;
     color:#dc3545
+}
+.is-invalid {
+  border-color: #dc3545;
 }
 .btn {
     display:inline-block;
@@ -103,6 +121,8 @@
     font-size:1rem;
     line-height:1.5;
     border-radius:.25rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
 .btn-primary {

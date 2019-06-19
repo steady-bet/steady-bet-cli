@@ -62,8 +62,8 @@ export default {
   mixins: [MultiModalMixin],
   data () {
     return {
-      email: '',
-      password: '',
+      email: 'raymond@steadybet.io',
+      password: 'wwwwww',
       submitted: false
     }
   },
@@ -76,11 +76,13 @@ export default {
   },
   methods: {
     ...mapActions('account', ['login', 'logout']),
+    ...mapActions('wallet', ['setWallet']),
     handleSubmit (e) {
       this.submitted = true
       const { email, password } = this
       if (email && password) {
-        this.login({ email, password })
+        console.log('try to login...')
+        this.login( { email, password } )
       }
     }
   }

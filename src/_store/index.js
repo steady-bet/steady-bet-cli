@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 import { multiModal } from './modules/multiModal'
 import { wallet } from './modules/wallet'
+import { account } from './modules/account.module'
+import { alert } from './modules/alert.module'
 
 Vue.use(Vuex)
 
@@ -11,7 +13,9 @@ Vue.use(Vuex)
 
 const modules = {
   multiModal,
-  wallet
+  wallet,
+  account,
+  alert
 }
 
 export const store = new Vuex.Store({

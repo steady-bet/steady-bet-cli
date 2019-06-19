@@ -50,7 +50,7 @@ export default {
   },
   data () {
     return {
-      walletSetMode: true,
+      walletSetMode: false,
       walletInfo: {
         publicKey: ''
       },

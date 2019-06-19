@@ -1,3 +1,5 @@
+import { restHttp } from '../../_services/axios.service'
+
 const state = {
   walletData: {
     address: '',
@@ -22,9 +24,34 @@ const getters = {
   walletData: state => state.walletData
 }
 
+const actions = {
+  setWallet ({ commit }, address) {
+    console.log('*** action setWallet : adress=' + address)
+    restHttp
+      .get('/wallet/' + address)
+      .then(res => {
+        let walletInfo = res.data
+        console.log('balance=' + walletInfo.balance)
+        commit('changeWallet', walletInfo.publicKey)
+        commit('updateBalance', walletInfo.balance)
+      }).catch(e => console.log(e))
+    /*
+    restHttp
+      .get('/wallet/getToken/' + address)
+      .then(res => {
+        let tokenTBTAmount = res.data
+        console.log('token balance=' + tokenTBTAmount)
+        commit('updateWalletToken', tokenTBTAmount)
+      })
+      .catch(e => console.log(e))
+    */
+  }
+}
+
 export const wallet = {
   namespaced: true,
   state,
   mutations,
-  getters
+  getters,
+  actions
 }

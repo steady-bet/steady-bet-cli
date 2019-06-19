@@ -98,8 +98,9 @@ export default {
       user: {
         email: 'raymond@steadybet.io',
         pseudo: 'raymond',
-        wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
-        password: ''
+        // wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
+        wallet: 'Eyh6ZBiM9D9yyLDwFG7nqAwgm8fFfJn7NauZ6bQxsufn',
+        password: 'wwwwww'
       },
       submitted: false
     }

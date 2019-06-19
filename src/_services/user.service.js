@@ -11,16 +11,16 @@ export const userService = {
 //    delete: _delete
 }
 
-function login (username, password) {
-  console.log('*** login : username=' + username)
-  return restHttp.post('user/authenticate', JSON.stringify({ username, password }))
+function login ({ email, password }) {
+  console.log('*** service login = ' + email)
+  return restHttp.post('user/authenticate', JSON.stringify({ email, password }))
     .then(function (response) {
       let user = response.data
       console.log('user ' + user.email + ' found')
-      // console.log(JSON.stringify(user))
       // login successful if there's a jwt token in the response
       if (user.jwToken) {
-        console.log('user ' + user.email + ' has a token ' + user.jwToken)
+        // console.log('user ' + user.email + ' has a token ' + user.jwToken)
+        console.log(JSON.stringify(user))
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user))
       }
@@ -47,12 +47,12 @@ function register (user) {
     .then(response => {
       console.log(response.data)
       // login successful if there's a jwt token in the response
-      let user = response.data
-      if (user && user.jwToken) {
+      let u = response.data
+      if (u && u.jwToken) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(u))
       }
-      return user
+      return u
     })
     .catch(response => {
       console.log(response)

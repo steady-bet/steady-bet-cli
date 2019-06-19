@@ -8,12 +8,14 @@ const user = JSON.parse(localStorage.getItem('user'))
 const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
 
 const actions = {
-  login ({ dispatch, commit }, { username, password }) {
-    commit('loginRequest', { username })
-    userService.login(username, password)
+  login ({ dispatch, commit }, { email, password }) {
+    commit('loginRequest', { email })
+    userService.login({ email, password })
       .then(
         user => {
           commit('loginSuccess', user)
+          dispatch('wallet/setWallet', user.wallet, { root: true })
+          commit('multiModal/hideModal', {}, { root: true })
           router.push('/')
         },
         error => {

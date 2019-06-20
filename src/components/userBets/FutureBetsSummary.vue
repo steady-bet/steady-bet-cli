@@ -49,7 +49,7 @@ export default {
       function() {
         this.loadFutureBets();
       }.bind(this),
-      120000
+      30000
     );
   }
 };

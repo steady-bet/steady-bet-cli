@@ -35,7 +35,6 @@ const actions = {
         commit('changeWallet', walletInfo.publicKey)
         commit('updateBalance', walletInfo.balance)
       }).catch(e => console.log(e))
-    /*
     restHttp
       .get('/wallet/getToken/' + address)
       .then(res => {
@@ -44,7 +43,6 @@ const actions = {
         commit('updateWalletToken', tokenTBTAmount)
       })
       .catch(e => console.log(e))
-    */
   }
 }
 

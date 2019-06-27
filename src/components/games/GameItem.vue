@@ -80,7 +80,7 @@ export default {
     loadBets() {
       axios
         .get(
-          "http://localhost:8383/matches/getBetsOnScheduleMatch/" +
+          "http://localhost:8383/matches/scheduled/getBetsOnScheduleMatch/" +
             this.game.smartContract
         )
         .then(res => {

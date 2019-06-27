@@ -98,7 +98,7 @@ export default {
       this.setWait();
       axios
         .get(
-          "http://localhost:8383/matches/getNewMatchBetToSign/" +
+          "http://localhost:8383/matches/scheduled/getNewMatchBetToSign/" +
             this.$props.selectedBet.smartContract +
             "?publicAddress=" +
             this.$store.getters['wallet/walletData'].address +
@@ -124,7 +124,7 @@ export default {
           signatureHex = signatureBuff.toString("hex");
           axios
             .post(
-              "http://localhost:8383/matches/sendBetSigned/" +
+              "http://localhost:8383/matches/scheduled/sendBetSigned/" +
                 this.$props.selectedBet.smartContract,
               {
                 publicAddress: this.$store.getters['wallet/walletData'].address,

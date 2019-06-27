@@ -32,7 +32,7 @@ export default {
         console.log(this.$store.getters['wallet/walletData'].address)
         axios
           .get(
-            "http://localhost:8383/user/" +
+            "http://localhost:8383/bet/" +
               this.$store.getters['wallet/walletData'].address +
               "/getUserFutureBets"
           )

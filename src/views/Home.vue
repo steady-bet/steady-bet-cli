@@ -41,7 +41,7 @@ export default {
       );
       if (!hasChildren) {
         axios
-          .get("http://localhost:8383/matches/" + id)
+          .get("http://localhost:8383/matches/scheduled/" + id)
           .then(res => (this.games = res.data))
           .catch(e => console.log(e));
       }

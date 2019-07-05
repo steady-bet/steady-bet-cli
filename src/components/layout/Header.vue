@@ -7,6 +7,9 @@
           <router-link to="/">Bet On Events</router-link>|
         </li>
         <li>
+          <router-link to="/live">Live</router-link>|
+        </li>
+        <li>
           <router-link to="/about">About</router-link>
         </li>
       </ul>

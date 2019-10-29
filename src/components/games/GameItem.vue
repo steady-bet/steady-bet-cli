@@ -93,7 +93,7 @@ export default {
   computed: {
     linkToSmart() {
       return (
-        "https://monitor.credits.com/testnet-r4_2/Contract/" +
+        "https://monitor.credits.com/testnet/Contract/" +
         this.game.smartContract
       );
     }

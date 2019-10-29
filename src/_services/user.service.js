@@ -13,7 +13,6 @@ export const userService = {
 
 function login ({ username, password }) {
   console.log('*** service login = ' + username)
-  console.log(restHttp)
   return restHttp.post('auth/authenticate', JSON.stringify({ username, password }))
     .then(function (response) {
       let jwtResponse = response.data

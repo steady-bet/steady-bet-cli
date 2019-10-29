@@ -6,19 +6,20 @@
         <h2>Register</h2>
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="email">E-mail</label>
+            <label for="username">Username</label>
             <input
               type="text"
               size="30"
-              v-model="user.email"
+              v-model="user.username"
               v-validate="'required|email'"
-              name="email"
+              placeholder="john.doe@mydomain.com"
+              name="username"
               class="form-control"
-              :class="{ 'is-invalid': submitted && errors.has('email') }"/>
+              :class="{ 'is-invalid': submitted && errors.has('username') }"/>
             <div
-              v-if="submitted && errors.has('email')"
+              v-if="submitted && errors.has('username')"
               class="invalid-feedback"
-            >{{ errors.first('email') }}</div>
+            >{{ errors.first('username') }}</div>
           </div>
           <div class="form-group">
             <label for="pseudo">Pseudo</label>
@@ -96,11 +97,14 @@ export default {
   data () {
     return {
       user: {
+        username: 'raymond@steadybet.io',
         email: 'raymond@steadybet.io',
         pseudo: 'raymond',
         // wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
+        // wallet: 'Axbxj5oKyDjJg1rtcDNmnxmK36EDHtWA6wQjDDUjxgkF',
         wallet: 'Eyh6ZBiM9D9yyLDwFG7nqAwgm8fFfJn7NauZ6bQxsufn',
-        password: 'wwwwww'
+        password: 'wwwwww',
+        roles: ['USER']
       },
       submitted: false
     }
@@ -121,12 +125,14 @@ export default {
       this.$validator.validateAll().then(valid => {
         console.log('register form valid =' + valid)
         if (valid) {
-          let registeredUser = this.register(this.user)
+          let response = this.register(this.user)
           // TODO checker la réponse
-          console.log('registered user = ' + registeredUser)
+          console.log('registered user = ' + response)
+          if (response === 'User registered successfully!') {
+            // TODO
+          }
           this.hideModal()
-          // this.changeWallet(this.wallet)
-          // this.setModal('Login')
+          this.setModal('Login')
         }
       })
     }

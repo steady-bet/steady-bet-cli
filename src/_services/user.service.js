@@ -11,20 +11,23 @@ export const userService = {
 //    delete: _delete
 }
 
-function login ({ email, password }) {
-  console.log('*** service login = ' + email)
-  return restHttp.post('user/authenticate', JSON.stringify({ email, password }))
+function login ({ username, password }) {
+  console.log('*** service login = ' + username)
+  console.log(restHttp)
+  return restHttp.post('auth/authenticate', JSON.stringify({ username, password }))
     .then(function (response) {
-      let user = response.data
-      console.log('user ' + user.email + ' found')
+      let jwtResponse = response.data
+      console.log('user ' + username + ' found')
       // login successful if there's a jwt token in the response
-      if (user.jwToken) {
-        // console.log('user ' + user.email + ' has a token ' + user.jwToken)
-        console.log(JSON.stringify(user))
+      if (jwtResponse.token && jwtResponse.type && jwtResponse.user) {
+        console.log(JSON.stringify(jwtResponse))
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user))
+        // localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('access_token', JSON.stringify(jwtResponse.token))
+        localStorage.setItem('token_type', 'Bearer')
+        localStorage.setItem('user', JSON.stringify(jwtResponse.user))
       }
-      return user
+      return jwtResponse
     })
     .catch(function (response) {
       console.log(response)
@@ -37,21 +40,22 @@ function login ({ email, password }) {
 }
 
 function logout () {
+  localStorage.removeItem('access_token')
   // remove user from local storage to log user out
   localStorage.removeItem('user')
 }
 
 function register (user) {
-  console.log('Send user to register : user = ' + JSON.stringify(user))
-  return restHttp.post('/user/register', JSON.stringify(user))
+  console.log('*** service register user = ' + JSON.stringify(user))
+  return restHttp.post('auth/register', JSON.stringify(user))
     .then(response => {
       console.log(response.data)
       // login successful if there's a jwt token in the response
       let u = response.data
-      if (u && u.jwToken) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(u))
-      }
+      //   if (u && u.jwToken) {
+      //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+      //     localStorage.setItem('user', JSON.stringify(u))
+      //   }
       return u
     })
     .catch(response => {

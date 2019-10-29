@@ -5,17 +5,18 @@
       <h2>Login</h2>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="username">Username</label>
           <input
             type="text"
             size="30"
-            v-model="email"
+            v-model="username"
+            placeholder="john.doe@mydomain.com"
             v-validate="'required|email'"
-            name="email"
+            name="username"
             class="form-control"
-            :class="{ 'is-invalid': submitted && errors.has('email') }"
+            :class="{ 'is-invalid': submitted && errors.has('username') }"
           />
-          <div v-show="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
+          <div v-show="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div>
         </div>
         <div class="form-group">
           <label htmlFor="password">Password</label>
@@ -62,7 +63,7 @@ export default {
   mixins: [MultiModalMixin],
   data () {
     return {
-      email: 'raymond@steadybet.io',
+      username: 'raymond@steadybet.io',
       password: 'wwwwww',
       submitted: false
     }
@@ -76,13 +77,12 @@ export default {
   },
   methods: {
     ...mapActions('account', ['login', 'logout']),
-    ...mapActions('wallet', ['setWallet']),
     handleSubmit (e) {
       this.submitted = true
-      const { email, password } = this
-      if (email && password) {
+      const { username, password } = this
+      if (username && password) {
         console.log('try to login...')
-        this.login( { email, password } )
+        this.login({ username, password })
       }
     }
   }

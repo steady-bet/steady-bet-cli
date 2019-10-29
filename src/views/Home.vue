@@ -17,37 +17,35 @@
 
 <script>
 // @ is an alias to /src
-import MenuItems from "@/components/MenuItems/MenuItems.vue";
-import Games from "@/components/games/Games.vue";
-import FutureBetsSummary from "@/components/userBets/FutureBetsSummary.vue"
-import axios from "axios";
+import MenuItems from '@/components/MenuItems/MenuItems.vue'
+import Games from '@/components/games/Games.vue'
+import FutureBetsSummary from '@/components/userBets/FutureBetsSummary.vue'
+import axios from 'axios'
 export default {
-  name: "home",
+  name: 'home',
   components: {
     MenuItems,
     Games,
     FutureBetsSummary
   },
-  data() {
+  data () {
     return {
       games: [],
       myFutureBets: []
-    };
+    }
   },
   methods: {
-    selectNode(id, hasChildren) {
-      console.log(
-        "parent say id is :" + id + " and hasChildren = " + hasChildren
-      );
+    selectNode (id, hasChildren) {
+      console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
         axios
-          .get("http://localhost:8383/matches/" + id)
+          .get('http://localhost:8383/matches/' + id)
           .then(res => (this.games = res.data))
-          .catch(e => console.log(e));
+          .catch(e => console.log(e))
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

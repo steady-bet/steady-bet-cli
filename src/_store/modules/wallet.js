@@ -27,22 +27,26 @@ const getters = {
 const actions = {
   setWallet ({ commit }, address) {
     console.log('*** action setWallet : adress=' + address)
+    // if user is authenticated, his token is in local storage
+    // token is added automagically in axios.service.js
     restHttp
-      .get('/wallet/' + address)
+      .get('wallet/' + address)
       .then(res => {
         let walletInfo = res.data
         console.log('balance=' + walletInfo.balance)
         commit('changeWallet', walletInfo.publicKey)
         commit('updateBalance', walletInfo.balance)
       }).catch(e => console.log(e))
+    /*
     restHttp
-      .get('/wallet/getToken/' + address)
+      .get('wallet/getToken/' + address)
       .then(res => {
         let tokenTBTAmount = res.data
         console.log('token balance=' + tokenTBTAmount)
         commit('updateWalletToken', tokenTBTAmount)
       })
       .catch(e => console.log(e))
+    */
   }
 }
 

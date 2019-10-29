@@ -8,15 +8,17 @@ const user = JSON.parse(localStorage.getItem('user'))
 const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
 
 const actions = {
-  login ({ dispatch, commit }, { email, password }) {
-    commit('loginRequest', { email })
-    userService.login({ email, password })
+  login ({ dispatch, commit }, { username, password }) {
+    commit('loginRequest', { username })
+    userService.login({ username, password })
       .then(
-        user => {
-          commit('loginSuccess', user)
-          dispatch('wallet/setWallet', user.wallet, { root: true })
-          commit('multiModal/hideModal', {}, { root: true })
-          router.push('/')
+        jwtResponse => {
+          if (jwtResponse && jwtResponse.user) {
+            commit('loginSuccess', jwtResponse.user)
+            dispatch('wallet/setWallet', jwtResponse.user.wallet, { root: true })
+            commit('multiModal/hideModal', {}, { root: true })
+            router.push('/')
+          }
         },
         error => {
           commit('loginFailure', error)
@@ -33,8 +35,10 @@ const actions = {
     userService.register(user)
       .then(
         user => {
-          commit('registerSuccess', user)
-          router.push('/login')
+          // commit('registerSuccess', user)
+          commit('registerSuccess')
+          // show Login popup after successful registering
+          commit('multiModal/setModal', 'Login', { root: true })
           setTimeout(() => {
             // display success message after route change completes
             dispatch('alert/success', 'Registration successful', { root: true })
@@ -68,7 +72,7 @@ const mutations = {
   registerRequest (state, user) {
     state.status = { registering: true }
   },
-  registerSuccess (state, user) {
+  registerSuccess (state) {
     state.status = {}
   },
   registerFailure (state, error) {

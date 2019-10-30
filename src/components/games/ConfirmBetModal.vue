@@ -68,34 +68,34 @@ export default {
   },
   methods: {
     close() {
-      this.amountToBet = 50;
-      this.privateKey = '';
-      this.$emit('close');
-      this.displayBetButton = true;
-      this.betValidated = false;
-      this.betError = false;
-      this.waiting = false;
+      this.amountToBet = 50
+      this.privateKey = ''
+      this.$emit('close')
+      this.displayBetButton = true
+      this.betValidated = false
+      this.betError = false
+      this.waiting = false
     },
     setWait() {
-      this.waiting = true;
+      this.waiting = true
     },
     setErrorMsg() {
-      this.displayBetButton = true;
-      this.betValidated = false;
-      this.betError = true;
-      this.waiting = false;
+      this.displayBetButton = true
+      this.betValidated = false
+      this.betError = true
+      this.waiting = false
     },
     setSuccessMsg() {
-      this.displayBetButton = false;
-      this.betValidated = true;
-      this.betError = false;
-      this.waiting = false;
+      this.displayBetButton = false
+      this.betValidated = true
+      this.betError = false
+      this.waiting = false
     },
     betIt() {
       console.log(
         'do bet !!! ' + this.amountToBet + ', ' + this.$props.selectedBet.team
-      );
-      this.setWait();
+      )
+      this.setWait()
       restHttp
         .get('matches/scheduled/getNewMatchBetToSign/' +
             this.$props.selectedBet.smartContract +
@@ -107,20 +107,20 @@ export default {
             this.amountToBet
         )
         .then(res => {
-          var signatureHex = '';
-          var trxId;
-          trxId = res.data.transactionId;
-          console.log('private ' + this.privateKey);
-          var keyByte = bs58.decode(this.privateKey);
-          console.log(trxId);
-          console.log(res.data.hexaToSign);
+          var signatureHex = ''
+          var trxId
+          trxId = res.data.transactionId
+          console.log('private ' + this.privateKey)
+          var keyByte = bs58.decode(this.privateKey)
+          console.log(trxId)
+          console.log(res.data.hexaToSign)
 
           var signature = nacl.sign.detached(
             Buffer.from(res.data.hexaToSign, 'hex'),
             keyByte
-          );
-          var signatureBuff = new Buffer(signature);
-          signatureHex = signatureBuff.toString('hex');
+          )
+          var signatureBuff = new Buffer(signature)
+          signatureHex = signatureBuff.toString('hex')
           restHttp
             .post('matches/scheduled/sendBetSigned/' + this.$props.selectedBet.smartContract,
               {
@@ -142,32 +142,32 @@ export default {
               */
             )
             .then(res2 => {
-              console.log('result transaction  : ' + res2.data);
-              this.amountToBet = null;
-              this.privateKey = null;
-              this.setSuccessMsg();
+              console.log('result transaction  : ' + res2.data)
+              this.amountToBet = null
+              this.privateKey = null
+              this.setSuccessMsg()
               if (res2.data == true) {
-                this.setSuccessMsg();
+                this.setSuccessMsg()
               } else {
-                this.setErrorMsg();
+                this.setErrorMsg()
               }
             })
             .catch(e => {
-              console.log(e);
-              this.privateKey = null;
-              this.amountToBet = null;
-              this.setErrorMsg();
-            });
+              console.log(e)
+              this.privateKey = null
+              this.amountToBet = null
+              this.setErrorMsg()
+            })
         })
         .catch(e => {
-          console.log(e);
-          this.privateKey = null;
-          this.amountToBet = null;
-          this.setErrorMsg();
-        });
+          console.log(e)
+          this.privateKey = null
+          this.amountToBet = null
+          this.setErrorMsg()
+        })
     }
   }
-};
+}
 </script>
 
 

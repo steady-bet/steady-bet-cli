@@ -16,7 +16,7 @@ export default {
     bTreeView,
     [LiquorTree.name]: LiquorTree
   },
-  data() {
+  data () {
     return {
       logoPath: require('../../assets/empty.png'),
       categories: [],
@@ -30,30 +30,30 @@ export default {
           children: 'subCategories'
         }
       }
-    };
+    }
   },
-  created() {
-    this.getCategories();
+  created () {
+    this.getCategories()
   },
   methods: {
-    getCategories() {
+    getCategories () {
       return restHttp
         .get('categories')
         .then(res => (this.treeData = res.data))
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
     },
-    onNodeSelected(node) {
-      console.log(node.text + ' , ' + node.data.catFinal);
-      if(!node.hasChildren()) {
-        this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png');
+    onNodeSelected (node) {
+      console.log(node.text + ' , ' + node.data.catFinal)
+      if (!node.hasChildren()) {
+        this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png')
       } else {
-        this.logoPath = require('../../assets/empty.png');
+        this.logoPath = require('../../assets/empty.png')
       }
-      console.log('test children=' + node.hasChildren());
+      console.log('test children=' + node.hasChildren())
       this.$emit('nodeSelected', node.id, node.hasChildren())
     }
   }
-};
+}
 </script>
 
 <style scoped>

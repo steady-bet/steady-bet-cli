@@ -18,13 +18,13 @@ export default {
   data () {
     return {
       myFutureBets: []
-    };
+    }
   },
   computed: {
     sortedBetItems: function() {
       return this.myFutureBets.sort(
         (a, b) => new Date(a.pk.matchDate) - new Date(b.pk.matchDate)
-      );
+      )
     }
   },
   methods: {
@@ -34,20 +34,20 @@ export default {
         restHttp
           .get('user/' + this.$store.getters['wallet/walletData'].address + '/getUserFutureBets')
           .then(res => {
-            this.myFutureBets = res.data;
-            console.log(this.myFutureBets);
+            this.myFutureBets = res.data
+            console.log(this.myFutureBets)
           })
-          .catch(e => console.log(e));
+          .catch(e => console.log(e))
       }
     }
   },
   mounted() {
     this.interval = setInterval(
       function() {
-        this.loadFutureBets();
+        this.loadFutureBets()
       }.bind(this),
       120000
-    );
+    )
   }
 };
 </script>

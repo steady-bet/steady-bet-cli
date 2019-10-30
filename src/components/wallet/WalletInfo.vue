@@ -59,8 +59,8 @@ export default {
       walletSetMode: false,
       walletInfo: {
         publicKey: ''
-      },
-      //tokenTBTAmount: ''
+      }
+      // , tokenTBTAmount: ''
     }
   },
   methods: {
@@ -92,8 +92,8 @@ export default {
     enableWalletSetMode () {
       this.walletSetMode = true
       this.walletInfo.balance = ''
-      //this.walletInfo.lastTrxId = null
-      //this.tokenTBTAmount = ''
+      // this.walletInfo.lastTrxId = null
+      // this.tokenTBTAmount = ''
     }
   }
 }

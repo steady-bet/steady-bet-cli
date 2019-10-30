@@ -15,15 +15,15 @@
         </header>
         <section class="modal-body">
           <slot name="body">
-            Token available : {{ $store.getters['wallet/walletData'].tokenBalance }} TBT
+            Token available : {{ $store.getters['wallet/walletData'].csBalance }} CS
             <div v-if="!betValidated">
               <br>
               <input
                 id="amountToBet"
                 v-model="amountToBet"
                 type="number"
-                :min="25"
-                :max="$store.getters['wallet/walletData'].tokenBalance"
+                :min="5"
+                :max="$store.getters['wallet/walletData'].csBalance"
               >
               <br>
               <br>
@@ -97,7 +97,7 @@ export default {
       )
       this.setWait()
       restHttp
-        .get('matches/scheduled/getNewMatchBetToSign/' +
+        .get('matches/scheduled/getNewMatchBetToSignWithCS/' +
             this.$props.selectedBet.smartContract +
             '?publicAddress=' +
             this.$store.getters['wallet/walletData'].address +
@@ -122,7 +122,7 @@ export default {
           var signatureBuff = new Buffer(signature)
           signatureHex = signatureBuff.toString('hex')
           restHttp
-            .post('matches/scheduled/sendBetSigned/' + this.$props.selectedBet.smartContract,
+            .post('matches/scheduled/sendBetSignedWithCS/' + this.$props.selectedBet.smartContract,
               {
                 publicAddress: this.$store.getters['wallet/walletData'].address,
                 signature: signatureHex,

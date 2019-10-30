@@ -1,5 +1,6 @@
 <template>
   <div v-if="walletSetMode === true">
+    <!--
     <form @submit="setWallet">
       <input
         type="text"
@@ -9,12 +10,15 @@
       >
       <input type="submit" class="btn" value="Ok">
     </form>
+    -->
     <div class="balance">
-      balance : {{walletInfo.balance}}
+      balance : {{walletInfo.balance}} CS
+      <!--
       <br>
       TBT Token : {{tokenTBTAmount}}
-      <!--<br>
-      last trx id : {{walletInfo.lastTrxId}}-->
+      <br>
+      last trx id : {{walletInfo.lastTrxId}}
+      -->
     </div>
   </div>
   <div v-else>
@@ -26,10 +30,11 @@
       </div>
     </div>
     <div class="balance">
-      balance : {{ this.$store.getters['wallet/walletData'].csBalance }}
+      balance : {{ this.$store.getters['wallet/walletData'].csBalance }} CS
+      <!--
       <br>
       TBT Token : {{ this.$store.getters['wallet/walletData'].tokenBalance }}
-      <!--<br>
+      <br>
       last trx id : {{walletInfo.lastTrxId}}-->
     </div>
   </div>
@@ -55,7 +60,7 @@ export default {
       walletInfo: {
         publicKey: ''
       },
-      tokenTBTAmount: ''
+      //tokenTBTAmount: ''
     }
   },
   methods: {
@@ -74,20 +79,21 @@ export default {
           this.$store.commit('wallet/changeWallet', this.walletInfo.publicKey)
           this.$store.commit('wallet/updateBalance', this.walletInfo.balance)
         }).catch(e => console.log(e))
-
+      /*
       axios.get('http://localhost:8383/wallet/getToken/' + this.walletInfo.publicKey)
         .then(res => {
           this.tokenTBTAmount = res.data
           this.$store.commit('wallet/updateWalletToken', this.tokenTBTAmount)
         })
         .catch(e => console.log(e))
+      */
       this.walletSetMode = false
     },
     enableWalletSetMode () {
       this.walletSetMode = true
       this.walletInfo.balance = ''
-      this.walletInfo.lastTrxId = null
-      this.tokenTBTAmount = ''
+      //this.walletInfo.lastTrxId = null
+      //this.tokenTBTAmount = ''
     }
   }
 }

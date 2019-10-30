@@ -3,8 +3,10 @@ import { restHttp } from '../../_services/axios.service'
 const state = {
   walletData: {
     address: '',
-    csBalance: 0,
-    tokenBalance: 0
+    csBalance: 0
+    /*
+    , tokenBalance: 0
+    */
   }
 }
 
@@ -14,10 +16,13 @@ const mutations = {
   },
   updateBalance (state, csBalance) {
     state.walletData.csBalance = csBalance
-  },
+  }
+  /*
+  ,
   updateWalletToken (state, tokenBalance) {
     state.walletData.tokenBalance = tokenBalance
   }
+  */
 }
 
 const getters = {

@@ -22,8 +22,8 @@ function login ({ username, password }) {
         console.log(JSON.stringify(jwtResponse))
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         // localStorage.setItem('user', JSON.stringify(user))
-        localStorage.setItem('access_token', JSON.stringify(jwtResponse.token))
-        localStorage.setItem('token_type', 'Bearer')
+        localStorage.setItem('access_token', jwtResponse.token)
+        localStorage.setItem('token_type', jwtResponse.type)
         localStorage.setItem('user', JSON.stringify(jwtResponse.user))
       }
       return jwtResponse

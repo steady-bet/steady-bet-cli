@@ -9,8 +9,8 @@
 <script>
 import axios from "axios";
 export default {
-  name: "futureBetItem",
-  props: ["betItem"],
+  name: 'futureBetItem',
+  props: ['betItem'],
   components: {
   },
   data() {

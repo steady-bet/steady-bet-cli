@@ -33,8 +33,8 @@
 import confirmBetModal from "./ConfirmBetModal.vue";
 import axios from "axios";
 export default {
-  name: "GameItem",
-  props: ["game"],
+  name: 'GameItem',
+  props: ['game'],
   components: {
     confirmBetModal
   },
@@ -43,8 +43,8 @@ export default {
       isModalVisible: false,
       selectedBet: {
         team: -1,
-        teamName: "",
-        smartContract: "",
+        teamName: '',
+        smartContract: '',
         matchDate: null,
         matchName: null,
         interval: null
@@ -54,28 +54,28 @@ export default {
   },
   methods: {
     showModal() {
-      this.selectedBet.smartContract = this.game.smartContract;
-      this.selectedBet.matchDate = this.game.schedule;
-      this.selectedBet.matchName = this.game.team1+" - "+this.game.team2;
-      this.isModalVisible = true;
+      this.selectedBet.smartContract = this.game.smartContract
+      this.selectedBet.matchDate = this.game.schedule
+      this.selectedBet.matchName = this.game.team1 + ' - ' + this.game.team2
+      this.isModalVisible = true
     },
     showModal0() {
-      this.selectedBet.team = 0;
-      this.selectedBet.teamName = this.game.team1;
-      this.showModal();
+      this.selectedBet.team = 0
+      this.selectedBet.teamName = this.game.team1
+      this.showModal()
     },
     showModal1() {
-      this.selectedBet.team = 1;
-      this.selectedBet.teamName = "draw";
-      this.showModal();
+      this.selectedBet.team = 1
+      this.selectedBet.teamName = 'draw'
+      this.showModal()
     },
     showModal2() {
-      this.selectedBet.team = 2;
-      this.selectedBet.teamName = this.game.team2;
-      this.showModal();
+      this.selectedBet.team = 2
+      this.selectedBet.teamName = this.game.team2
+      this.showModal()
     },
     closeModal() {
-      this.isModalVisible = false;
+      this.isModalVisible = false
     },
     loadBets() {
       axios
@@ -84,40 +84,31 @@ export default {
             this.game.smartContract
         )
         .then(res => {
-          this.matchBets = res.data;
-          console.log(this.matchBets.totalHome);
+          this.matchBets = res.data
+          console.log(this.matchBets.totalHome)
         })
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
     }
   },
   computed: {
     linkToSmart() {
-      return (
-        "https://monitor.credits.com/testnet-r4_2/Contract/" +
-        this.game.smartContract
-      );
+      return ('https://monitor.credits.com/testnet-r4_2/Contract/' + this.game.smartContract);
     }
   },
   mounted() {
-    this.loadBets();
+    this.loadBets()
     this.interval = setInterval(
       function() {
-        this.loadBets();
+        this.loadBets()
       }.bind(this),
       20000
-    );
+    )
   },
   beforeDestroy() {
     clearInterval(this.interval);
   }
 };
 </script>
-
-
-
-
-
-
 
 <style scoped>
 .game-item {

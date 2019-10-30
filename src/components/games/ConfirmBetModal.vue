@@ -53,13 +53,13 @@ import axios from "axios";
 import nacl from "tweetnacl";
 import bs58 from "bs58";
 export default {
-  name: "confirmBetModal",
-  props: ["selectedBet"],
+  name: 'confirmBetModal',
+  props: ['selectedBet'],
   components: {},
   data() {
     return {
       amountToBet: 50,
-      privateKey: "",
+      privateKey: '',
       betValidated: false,
       betError: false,
       waiting: false,
@@ -69,8 +69,8 @@ export default {
   methods: {
     close() {
       this.amountToBet = 50;
-      this.privateKey = "";
-      this.$emit("close");
+      this.privateKey = '';
+      this.$emit('close');
       this.displayBetButton = true;
       this.betValidated = false;
       this.betError = false;
@@ -93,31 +93,31 @@ export default {
     },
     betIt() {
       console.log(
-        "do bet !!! " + this.amountToBet + ", " + this.$props.selectedBet.team
+        'do bet !!! ' + this.amountToBet + ', ' + this.$props.selectedBet.team
       );
       this.setWait();
       axios
         .get(
           "http://localhost:8383/matches/getNewMatchBetToSign/" +
             this.$props.selectedBet.smartContract +
-            "?publicAddress=" +
+            '?publicAddress=' +
             this.$store.getters['wallet/walletData'].address +
-            "&selectedTeam=" +
+            '&selectedTeam=' +
             this.$props.selectedBet.team +
-            "&amount=" +
+            '&amount=' +
             this.amountToBet
         )
         .then(res => {
-          var signatureHex = "";
+          var signatureHex = '';
           var trxId;
           trxId = res.data.transactionId;
-          console.log("private " + this.privateKey);
+          console.log('private ' + this.privateKey);
           var keyByte = bs58.decode(this.privateKey);
           console.log(trxId);
           console.log(res.data.hexaToSign);
 
           var signature = nacl.sign.detached(
-            Buffer.from(res.data.hexaToSign, "hex"),
+            Buffer.from(res.data.hexaToSign, 'hex'),
             keyByte
           );
           var signatureBuff = new Buffer(signature);
@@ -135,6 +135,7 @@ export default {
                 matchDateUtc: this.$props.selectedBet.matchDate,
                 selectedTeamName: this.$props.selectedBet.teamName,
                 matchName: this.$props.selectedBet.matchName
+              }
               },
               {
                 headers: {
@@ -143,7 +144,7 @@ export default {
               }
             )
             .then(res2 => {
-              console.log("result transaction  : " + res2.data);
+              console.log('result transaction  : ' + res2.data);
               this.amountToBet = null;
               this.privateKey = null;
               this.setSuccessMsg();

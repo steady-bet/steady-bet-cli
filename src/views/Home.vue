@@ -40,7 +40,7 @@ export default {
       console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
         restHttp
-          .get('matches/' + id)
+          .get(`matches/scheduled/${id}`)
           .then(res => (this.games = res.data))
           .catch(e => console.log(e))
       }

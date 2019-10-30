@@ -6,17 +6,17 @@
       <div>
         <img class="crest crest-left" v-bind:src="game.crestUrlTeam1">
       </div>
-      <div class="left" @click="showModal0">
+      <div class="left">
         <div>
           <strong>{{game.team1}}</strong>
         </div>
         <div class="rate-left">{{matchBets.homeRate ? matchBets.homeRate.toFixed(2)+'%' : '?'}}</div>
       </div>
-      <div class="middle" @click="showModal1">
+      <div class="middle">
         <div>DRAW</div>
         <div class="rate-middle">{{matchBets.drawRate ? matchBets.drawRate.toFixed(2)+'%' : '?'}}</div>
       </div>
-      <div class="right" @click="showModal2">
+      <div class="right">
         <strong>{{game.team2}}</strong>
         <div class="rate-right">{{matchBets.awayRate ? matchBets.awayRate.toFixed(2)+'%' : '?'}}</div>
       </div>
@@ -25,27 +25,25 @@
       </div>
     </div>
     <a class="linkSM" v-bind:href="linkToSmart">{{game.smartContract}}</a>
-    <confirmBetModal v-bind:selectedBet="selectedBet" v-show="isModalVisible" @close="closeModal"/>
+    
   </div>
 </template>
 
 <script>
-import confirmBetModal from './ConfirmBetModal.vue'
-import { restHttp } from '../../_services/axios.service'
-
+import axios from "axios";
 export default {
-  name: 'GameItem',
-  props: ['game'],
+  name: "GameItemLive",
+  props: ["game"],
   components: {
-    confirmBetModal
+
   },
   data() {
     return {
       isModalVisible: false,
       selectedBet: {
         team: -1,
-        teamName: '',
-        smartContract: '',
+        teamName: "",
+        smartContract: "",
         matchDate: null,
         matchName: null,
         interval: null
@@ -54,63 +52,22 @@ export default {
     };
   },
   methods: {
-    showModal() {
-      this.selectedBet.smartContract = this.game.smartContract
-      this.selectedBet.matchDate = this.game.schedule
-      this.selectedBet.matchName = this.game.team1 + ' - ' + this.game.team2
-      this.isModalVisible = true
-    },
-    showModal0() {
-      this.selectedBet.team = 0
-      this.selectedBet.teamName = this.game.team1
-      this.showModal()
-    },
-    showModal1() {
-      this.selectedBet.team = 1
-      this.selectedBet.teamName = 'draw'
-      this.showModal()
-    },
-    showModal2() {
-      this.selectedBet.team = 2
-      this.selectedBet.teamName = this.game.team2
-      this.showModal()
-    },
-    closeModal() {
-      this.isModalVisible = false
-    },
-    loadBets() {
-      restHttp
-        .get('matches/scheduled/getBetsOnScheduleMatch/' + this.game.smartContract)
-        .then(res => {
-          this.matchBets = res.data
-          console.log(this.matchBets.totalHome)
-        })
-        .catch(e => console.log(e))
-    }
   },
   computed: {
-    linkToSmart() {
-      return ('https://monitor.credits.com/testnet-r4_2/Contract/' + this.game.smartContract);
-      return (
-        "https://monitor.credits.com/testnet/Contract/" +
-        this.game.smartContract
-      )
-    }
   },
   mounted() {    
-    this.loadBets()
-    this.interval = setInterval(
-      function() {
-        this.loadBets()
-      }.bind(this),
-      20000
-    )
+
   },
   beforeDestroy() {
-    clearInterval(this.interval);
   }
 };
 </script>
+
+
+
+
+
+
 
 <style scoped>
 .game-item {

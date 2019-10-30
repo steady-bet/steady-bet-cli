@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import { bTreeView } from "bootstrap-vue-treeview";
-import LiquorTree from "liquor-tree";
+import { restHttp } from '../../_services/axios.service'
+import { bTreeView } from 'bootstrap-vue-treeview'
+import LiquorTree from 'liquor-tree'
 
 export default {
   name: 'menuItems',
@@ -37,8 +37,8 @@ export default {
   },
   methods: {
     getCategories() {
-      return axios
-        .get("http://localhost:8383/categories")
+      return restHttp
+        .get('categories')
         .then(res => (this.treeData = res.data))
         .catch(e => console.log(e));
     },

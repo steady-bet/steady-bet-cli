@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import confirmBetModal from "./ConfirmBetModal.vue";
-import axios from "axios";
+import confirmBetModal from './ConfirmBetModal.vue'
+import { restHttp } from '../../_services/axios.service'
+
 export default {
   name: 'GameItem',
   props: ['game'],
@@ -78,11 +79,8 @@ export default {
       this.isModalVisible = false
     },
     loadBets() {
-      axios
-        .get(
-          "http://localhost:8383/matches/getBetsOnScheduleMatch/" +
-            this.game.smartContract
-        )
+      restHttp
+        .get('matches/scheduled/getBetsOnScheduleMatch/' + this.game.smartContract)
         .then(res => {
           this.matchBets = res.data
           console.log(this.matchBets.totalHome)

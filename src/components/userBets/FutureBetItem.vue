@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { restHttp } from '../../_services/axios.service'
 export default {
   name: 'futureBetItem',
   props: ['betItem'],

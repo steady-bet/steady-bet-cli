@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import nacl from "tweetnacl";
-import bs58 from "bs58";
+import { restHttp } from '../../_services/axios.service'
+import nacl from 'tweetnacl'
+import bs58 from 'bs58'
 export default {
   name: 'confirmBetModal',
   props: ['selectedBet'],
@@ -96,9 +96,8 @@ export default {
         'do bet !!! ' + this.amountToBet + ', ' + this.$props.selectedBet.team
       );
       this.setWait();
-      axios
-        .get(
-          "http://localhost:8383/matches/getNewMatchBetToSign/" +
+      restHttp
+        .get('matches/scheduled/getNewMatchBetToSign/' +
             this.$props.selectedBet.smartContract +
             '?publicAddress=' +
             this.$store.getters['wallet/walletData'].address +
@@ -121,11 +120,9 @@ export default {
             keyByte
           );
           var signatureBuff = new Buffer(signature);
-          signatureHex = signatureBuff.toString("hex");
-          axios
-            .post(
-              "http://localhost:8383/matches/sendBetSigned/" +
-                this.$props.selectedBet.smartContract,
+          signatureHex = signatureBuff.toString('hex');
+          restHttp
+            .post('matches/scheduled/sendBetSigned/' + this.$props.selectedBet.smartContract,
               {
                 publicAddress: this.$store.getters['wallet/walletData'].address,
                 signature: signatureHex,
@@ -136,12 +133,13 @@ export default {
                 selectedTeamName: this.$props.selectedBet.teamName,
                 matchName: this.$props.selectedBet.matchName
               }
-              },
+              /*,
               {
                 headers: {
                   "Content-Type": "application/json"
                 }
               }
+              */
             )
             .then(res2 => {
               console.log('result transaction  : ' + res2.data);

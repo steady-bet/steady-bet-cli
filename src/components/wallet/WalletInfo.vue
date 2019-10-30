@@ -72,7 +72,7 @@ export default {
       )
       */
       restHttp
-        .get('http://localhost:8383/wallet/' + this.walletInfo.publicKey)
+        .get('wallet/' + this.walletInfo.publicKey)
         .then(res => {
           this.walletInfo = res.data
           console.log(this.walletInfo.balance)

@@ -1,5 +1,4 @@
 import { restHttp } from './axios.service'
-import { authHeader } from '../_helpers'
 
 export const userService = {
   login,
@@ -40,6 +39,7 @@ function login ({ username, password }) {
 
 function logout () {
   localStorage.removeItem('access_token')
+  localStorage.removeItem('token_type')
   // remove user from local storage to log user out
   localStorage.removeItem('user')
 }
@@ -64,11 +64,7 @@ function register (user) {
 }
 
 function getById (id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  }
-  return restHttp.get(`user/${id}`, requestOptions)
+  return restHttp.get(`user/${id}`)
     .then(function (response) {
       // TODO
       console.log(response)

@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+import { restHttp } from '../../_services/axios.service'
 import 'vue-awesome/icons/exchange-alt'
 import Icon from 'vue-awesome/components/Icon'
 // import nacl from 'tweetnacl'
@@ -65,7 +66,7 @@ export default {
         'YpWzyv9PPBZhHSXMcChoaxpGtbXX4vPHCNqpDFbz2vg5gPSH1Xz35ZYftgp8EvJocRp7wU4KqjDDMBLFkZv7rSB'
       )
       */
-      axios
+      restHttp
         .get('http://localhost:8383/wallet/' + this.walletInfo.publicKey)
         .then(res => {
           this.walletInfo = res.data

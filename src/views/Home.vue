@@ -20,7 +20,8 @@
 import MenuItems from '@/components/MenuItems/MenuItems.vue'
 import Games from '@/components/games/Games.vue'
 import FutureBetsSummary from '@/components/userBets/FutureBetsSummary.vue'
-import axios from 'axios'
+import { restHttp } from '@/_services/axios.service'
+
 export default {
   name: 'home',
   components: {
@@ -38,8 +39,8 @@ export default {
     selectNode (id, hasChildren) {
       console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
-        axios
-          .get('http://localhost:8383/matches/' + id)
+        restHttp
+          .get('matches/' + id)
           .then(res => (this.games = res.data))
           .catch(e => console.log(e))
       }

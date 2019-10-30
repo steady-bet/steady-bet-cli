@@ -9,7 +9,8 @@
 
 <script>
 import futureBetItem from '@/components/userBets/FutureBetItem.vue'
-import axios from 'axios';
+import { restHttp } from '@/_services/axios.service'
+
 export default {
   name: 'futureBetsSummary',
   components: { futureBetItem },
@@ -30,12 +31,8 @@ export default {
     loadFutureBets() {
       if (this.$store.getters['wallet/walletData'].address) {
         console.log(this.$store.getters['wallet/walletData'].address)
-        axios
-          .get(
-            'http://localhost:8383/user/'
-            + this.$store.getters['wallet/walletData'].address
-            + '/getUserFutureBets'
-          )
+        restHttp
+          .get('user/' + this.$store.getters['wallet/walletData'].address + '/getUserFutureBets')
           .then(res => {
             this.myFutureBets = res.data;
             console.log(this.myFutureBets);
@@ -45,15 +42,12 @@ export default {
     }
   },
   mounted() {
-    /*
     this.interval = setInterval(
       function() {
         this.loadFutureBets();
       }.bind(this),
       120000
     );
-    */
-    console.log('FutureBetSummary.vue mounted : loadFutureBets => disabled')
   }
 };
 </script>

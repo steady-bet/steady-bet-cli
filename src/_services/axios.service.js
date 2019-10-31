@@ -12,24 +12,23 @@ export const restHttp = axios.create({
 // http://axios-js.com/docs/index.html#Interceptors
 restHttp.interceptors.request.use(
   function (config) {
-    console.log('coucou petite perruche : je suis l\'interceptor')
     const accessToken = localStorage.getItem('access_token')
     const tokenType = localStorage.getItem('token_type')
     if (tokenType && accessToken) {
       config.headers.Authorization = tokenType + ' ' + accessToken
       config.withCredentials = true
-      console.log(config.headers.Authorization)
     } else {
       delete restHttp.defaults.headers.common.Authorization
     }
+    console.log(`calling ${config.baseURL}${config.url}`)
     return config
   },
   function (error) { return Promise.reject(error) }
 )
 
 /*
-TODO later...
-possible to send 2 request and wait for the 2 result before processing
+//TODO later...
+//possible to send 2 request and wait for the 2 result before processing
 
 function getUserAccount() {
   return axios.get('/user/12345');

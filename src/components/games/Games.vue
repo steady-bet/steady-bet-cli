@@ -7,23 +7,23 @@
 </template>
 
 <script>
-import GameItem from "@/components/games/GameItem.vue";
+import GameItem from '@/components/games/GameItem.vue'
 
 export default {
-  name: "games",
+  name: 'games',
   components: { GameItem },
-  props: ["games"],
+  props: ['games'],
   data() {
-    return {};
+    return {}
   },
   computed: {
     sortedGames: function() {
-      return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule));
+      return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule))
     }
   },
   created() {},
   methods: {}
-};
+}
 </script>
 
 <style scoped>

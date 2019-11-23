@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const restHttp = axios.create({
   baseURL: 'http://localhost:8383/',
-  timeout: 10000,
+  timeout: 40000,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     'X-steady-bet': 'Steadybet powered by Credits'
@@ -15,7 +15,7 @@ restHttp.interceptors.request.use(
     const accessToken = localStorage.getItem('access_token')
     const tokenType = localStorage.getItem('token_type')
     if (tokenType && accessToken) {
-      config.headers.Authorization = tokenType + ' ' + accessToken
+      config.headers.Authorization = `${tokenType} ${accessToken}`
       config.withCredentials = true
     } else {
       delete restHttp.defaults.headers.common.Authorization

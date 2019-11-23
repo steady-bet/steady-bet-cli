@@ -32,7 +32,7 @@ export default {
       if (this.$store.getters['wallet/walletData'].address) {
         console.log(this.$store.getters['wallet/walletData'].address)
         restHttp
-          .get('bet/' + this.$store.getters['wallet/walletData'].address + '/getUserFutureBets')
+          .get(`bet/${this.$store.getters['wallet/walletData'].address}/getUserFutureBets`)
           .then(res => {
             this.myFutureBets = res.data
             console.log(this.myFutureBets)

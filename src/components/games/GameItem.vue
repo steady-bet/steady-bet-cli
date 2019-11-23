@@ -1,7 +1,6 @@
 <template>
   <div class="game-item">
-    <p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").format("LLLL") }}</p>
-    <!--<p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").utc() }}</p>-->
+    <p>{{ (game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss")).format("LLLL") }}</p>
     <div class="item-table">
       <div>
         <img class="crest crest-left" v-bind:src="game.crestUrlTeam1">
@@ -80,7 +79,7 @@ export default {
     },
     loadBets() {
       restHttp
-        .get('matches/scheduled/getBetsOnScheduleMatch/' + this.game.smartContract)
+        .get(`matches/scheduled/getBetsOnScheduleMatch/${this.game.smartContract}`)
         .then(res => {
           this.matchBets = res.data
           console.log(this.matchBets.totalHome)
@@ -90,11 +89,7 @@ export default {
   },
   computed: {
     linkToSmart() {
-      return ('https://monitor.credits.com/testnet-r4_2/Contract/' + this.game.smartContract);
-      return (
-        "https://monitor.credits.com/testnet/Contract/" +
-        this.game.smartContract
-      )
+      return (`https://monitor.credits.com/testnet/Contract/${this.game.smartContract}`)
     }
   },
   mounted() {    
@@ -103,7 +98,7 @@ export default {
       function() {
         this.loadBets()
       }.bind(this),
-      20000
+      120000
     )
   },
   beforeDestroy() {

@@ -98,7 +98,7 @@ export default {
       function() {
         this.loadBets()
       }.bind(this),
-      120000
+      20000
     )
   },
   beforeDestroy() {

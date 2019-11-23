@@ -22,7 +22,7 @@
                 id="amountToBet"
                 v-model="amountToBet"
                 type="number"
-                :min="5"
+                :min="1"
                 :max="$store.getters['wallet/walletData'].csBalance"
               >
               <br>

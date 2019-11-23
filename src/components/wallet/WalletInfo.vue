@@ -1,41 +1,21 @@
 <template>
   <div v-if="walletSetMode === true">
-    <!--
-    <form @submit="setWallet">
-      <input
-        type="text"
-        v-model="walletInfo.publicKey"
-        name="publicKey"
-        placeholder="Enter here your public Key..."
-      >
-      <input type="submit" class="btn" value="Ok">
-    </form>
-    -->
     <div class="balance">
-      balance : {{walletInfo.balance}} CS
-      <!--
-      <br>
-      TBT Token : {{tokenTBTAmount}}
-      <br>
-      last trx id : {{walletInfo.lastTrxId}}
-      -->
+      balance : {{walletInfo.balance.toFixed(3)}} CS
     </div>
   </div>
   <div v-else>
     <div class="inline">
-      <div class="inline-yellow">wallet : {{ this.$store.getters['wallet/walletData'].address }}</div>
+      <div class="inline-yellow">wallet : {{ this.$store.getters['wallet/walletData'].address | displayWallet }}</div>
       <div class="inline-red" @click="enableWalletSetMode">
+        <!--
         &nbsp;
         <v-icon name="exchange-alt"/>
+        -->
       </div>
     </div>
     <div class="balance">
-      balance : {{ this.$store.getters['wallet/walletData'].csBalance }} CS
-      <!--
-      <br>
-      TBT Token : {{ this.$store.getters['wallet/walletData'].tokenBalance }}
-      <br>
-      last trx id : {{walletInfo.lastTrxId}}-->
+      balance : {{ this.$store.getters['wallet/walletData'].csBalance.toFixed(3) }} CS
     </div>
   </div>
 </template>
@@ -94,6 +74,15 @@ export default {
       this.walletInfo.balance = ''
       // this.walletInfo.lastTrxId = null
       // this.tokenTBTAmount = ''
+    }
+  },
+  filters: {
+    displayWallet: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      if(value.length<12) return value
+      let result = value.substring(0,7) + '...' + value.substring(value.length-7, value.length)
+      return result
     }
   }
 }

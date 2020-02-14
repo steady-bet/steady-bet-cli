@@ -10,8 +10,8 @@
 
 <script>
 
-import axios from "axios";
-import GamesLive from "@/components/games/live/GamesLive.vue";
+import { restHttp } from '../_services/axios.service';
+import GamesLive from '@/components/games/live/GamesLive.vue'
 export default {
   name: "live",
   components: {
@@ -24,8 +24,8 @@ export default {
   },
   methods: {
     getLiveMatchs(){
-        axios
-          .get("http://localhost:8383/matches/live/getAll")
+        restHttp
+          .get('matches/live/getAll')
           .then(res => (this.games = res.data))
           .catch(e => console.log(e));
     }

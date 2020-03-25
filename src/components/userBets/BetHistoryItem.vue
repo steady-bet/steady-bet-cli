@@ -5,7 +5,7 @@
             <br/>
             <strong>Bet on</strong> {{bet.betName}} @ {{ bet.pk.betDate | moment(false, "MM-DD-YYYYTHH:mm:ss") }}
             <br/>
-            <strong>bet amount :</strong> {{bet.betAmount}} CS
+            <strong>bet amount :</strong> {{bet.betAmount | toCredits}}
             <br/>
             <!-- 0=open 1=live 2=closed -->
             <strong>match status :</strong> {{statusLabel}}
@@ -13,8 +13,10 @@
             <!-- 0=open 1=live 2=closed -->
             <strong>payout status :</strong> {{payoutStatusLabel}}
             <br/>
-            <strong>payout :</strong> {{bet.payout ? bet.payout : 0}} CS
-            <br>
+            <div v-show="hasPayout">
+              <strong>payout :</strong> {{bet.payout | toCredits }}
+              <br/>
+            </div>
             smartcontract : <a v-bind:href="linkToSmart">{{bet.pk.smartContract}}</a>
             <hr/>
         </div>
@@ -64,7 +66,12 @@ export default {
       } else {
         return 'UNKNOWN'
       }
+    },
+    hasPayout () {
+      return (this.bet.payout && this.bet.payout !== -1)
     }
+  },
+  methods: {
   }
 }
 </script>

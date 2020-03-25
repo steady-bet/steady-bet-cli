@@ -28,49 +28,45 @@
       </div>
     </div>
     <a class="linkSM" v-bind:href="linkToSmart">{{game.smartContract}}</a>
-    
+
   </div>
 </template>
 
 <script>
-import axios from "axios";
+
 export default {
-  name: "GameItemLive",
-  props: ["game"],
+  name: 'GameItemLive',
+  props: ['game'],
   components: {
 
   },
-  data() {
+  data () {
     return {
       isModalVisible: false,
       selectedBet: {
         team: -1,
-        teamName: "",
-        smartContract: "",
+        teamName: '',
+        smartContract: '',
         matchDate: null,
         matchName: null,
         interval: null
       },
       matchBets: []
-    };
+    }
   },
   methods: {
   },
   computed: {
+    linkToSmart () {
+      return (`https://monitor.credits.com/testnet/Contract/${this.game.smartContract}`)
+    }
   },
-  mounted() {    
-
+  mounted () {
   },
-  beforeDestroy() {
+  beforeDestroy () {
   }
-};
+}
 </script>
-
-
-
-
-
-
 
 <style scoped>
 .game-item {

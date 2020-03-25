@@ -17,29 +17,28 @@
   </div>
 </template>
 
-
 <script>
-import GameItem from "@/components/games/live/GameItemLive.vue";
+import GameItem from '@/components/games/live/GameItemLive.vue'
 import FutureBetsSummary from '@/components/userBets/FutureBetsSummary.vue'
 
 export default {
-  name: "gamesLive",
-  components: { 
-    GameItem, 
-    FutureBetsSummary 
+  name: 'gamesLive',
+  components: {
+    GameItem,
+    FutureBetsSummary
   },
-  props: ["games"],
-  data() {
-    return {};
+  props: ['games'],
+  data () {
+    return {}
   },
   computed: {
-    sortedGames: function() {
+    sortedGames: function () {
       return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule));
     }
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped>
@@ -80,5 +79,4 @@ export default {
 }
 /* Create two equal columns that floats next to each other */
 </style>
-
 

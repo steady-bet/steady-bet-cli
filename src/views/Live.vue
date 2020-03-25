@@ -10,30 +10,30 @@
 
 <script>
 
-import { restHttp } from '../_services/axios.service';
+import { restHttp } from '../_services/axios.service'
 import GamesLive from '@/components/games/live/GamesLive.vue'
 export default {
-  name: "live",
+  name: 'live',
   components: {
     GamesLive
   },
-  data() {
+  data () {
     return {
       games: []
-    };
-  },
-  methods: {
-    getLiveMatchs(){
-        restHttp
-          .get('matches/live/getAll')
-          .then(res => (this.games = res.data))
-          .catch(e => console.log(e));
     }
   },
-    mounted() {
-      this.getLiveMatchs();
+  methods: {
+    getLiveMatchs () {
+      restHttp
+        .get('matches/live/getAll')
+        .then(res => (this.games = res.data))
+        .catch(e => console.log(e))
+    }
+  },
+  mounted () {
+    this.getLiveMatchs()
   }
-};
+}
 </script>
 
 <style scoped>

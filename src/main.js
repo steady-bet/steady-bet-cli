@@ -10,6 +10,13 @@ Vue.config.productionTip = false
 Vue.use(VueMomentLib)
 Vue.use(VeeValidate)
 
+Vue.filter('toCredits', function (value) {
+  if (typeof value !== 'number') {
+    return value
+  }
+  return `${value} CS`
+})
+
 new Vue({
   store,
   router,

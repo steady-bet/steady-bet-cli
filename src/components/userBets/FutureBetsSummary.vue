@@ -21,14 +21,14 @@ export default {
     }
   },
   computed: {
-    sortedBetItems: function() {
+    sortedBetItems: function () {
       return this.myFutureBets.sort(
         (a, b) => new Date(a.pk.matchDate) - new Date(b.pk.matchDate)
       )
     }
   },
   methods: {
-    loadFutureBets() {
+    loadFutureBets () {
       if (this.$store.getters['wallet/walletData'].address) {
         console.log(this.$store.getters['wallet/walletData'].address)
         restHttp
@@ -41,18 +41,17 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.interval = setInterval(
-      function() {
+      function () {
         this.loadFutureBets()
       }.bind(this),
-      30000
+      3000000
     )
   }
-};
+}
 </script>
 
 <style scoped>
 
 </style>
-

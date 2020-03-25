@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     sortedGames: function () {
-      return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule));
+      return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule))
     }
   },
   created () {},
@@ -79,4 +79,3 @@ export default {
 }
 /* Create two equal columns that floats next to each other */
 </style>
-

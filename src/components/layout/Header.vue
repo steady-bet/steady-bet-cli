@@ -10,6 +10,9 @@
           <router-link to="/live">Live</router-link>|
         </li>
         <li>
+          <router-link to="/betHistory">Bet history</router-link>|
+        </li>
+        <li>
           <router-link to="/about">About</router-link>
         </li>
       </ul>

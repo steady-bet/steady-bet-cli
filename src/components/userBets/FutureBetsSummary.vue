@@ -46,7 +46,7 @@ export default {
       function () {
         this.loadFutureBets()
       }.bind(this),
-      3000000
+      30000
     )
   }
 }

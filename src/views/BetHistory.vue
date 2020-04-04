@@ -28,7 +28,7 @@ export default {
     sortedBetItems: function () {
       // reverse order by match date
       return this.bets.sort(
-        (a, b) => new Date(b.pk.matchDate) - new Date(a.pk.matchDate)
+        (a, b) => new Date(b.matchDate) - new Date(a.matchDate)
       )
     }
   },

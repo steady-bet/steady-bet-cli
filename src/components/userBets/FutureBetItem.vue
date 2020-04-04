@@ -1,6 +1,6 @@
 <template>
   <div class="bet-item">
-    {{ betItem.pk.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss").format("L") }} {{betItem.matchName}} 
+    {{ betItem.pk.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss").format("L") }} {{betItem.matchName}}
     <br>
     <strong>{{betItem.betName}} {{betItem.betAmount}} </strong>
   </div>
@@ -13,24 +13,21 @@ export default {
   props: ['betItem'],
   components: {
   },
-  data() {
+  data () {
     return {
-    };
+    }
   },
   methods: {
   },
   computed: {
   },
-  mounted() {
+  mounted () {
   },
-  beforeDestroy() {
+  beforeDestroy () {
 
   }
-};
+}
 </script>
-
-
-
 
 <style scoped>
 .bet-item {

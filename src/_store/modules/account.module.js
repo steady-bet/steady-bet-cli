@@ -16,6 +16,7 @@ const actions = {
           if (jwtResponse && jwtResponse.user) {
             commit('loginSuccess', jwtResponse.user)
             dispatch('wallet/setWallet', jwtResponse.user.wallet, { root: true })
+            dispatch('userFutureBets/loadBets', jwtResponse.user.wallet, { root: true })
             commit('multiModal/hideModal', {}, { root: true })
             router.push('/')
           }

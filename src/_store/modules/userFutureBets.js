@@ -17,16 +17,14 @@ const getters = {
 const actions = {
   loadBets ({ commit }, address) {
     console.log('*** action loadBets : adress=' + address)
-    if (this.$store.getters['wallet/walletData'].address) {
-      console.log(this.$store.getters['wallet/walletData'].address)
-      restHttp
-        .get(`bet/${this.$store.getters['wallet/walletData'].address}/getUserFutureBets`)
-        .then(res => {
-          this.myFutureBets = res.data
-          console.log(this.myFutureBets)
-        })
-        .catch(e => console.log(e))
-    }
+    restHttp
+      .get('bet/' + address + '/getUserFutureBets')
+      .then(res => {
+        this.myFutureBets = res.data
+        commit('updateBets', res.data)
+        console.log(this.myFutureBets)
+      })
+      .catch(e => console.log(e))
   }
 }
 

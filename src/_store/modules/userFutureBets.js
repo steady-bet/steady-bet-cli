@@ -11,7 +11,13 @@ const mutations = {
 }
 
 const getters = {
-  userFutureBets: state => state.userFutureBets
+  userFutureBets: state => state.userFutureBets,
+  userFutureBetsOrderedDateAsc: state => {
+    return state.userFutureBets.sort(userFutureBet => userFutureBet.pk.matchDate)
+  },
+  userFutureBetsOrderedDateDesc: state => {
+    return state.userFutureBets.reverse(userFutureBet => userFutureBet.pk.matchDate)
+  }
 }
 
 const actions = {

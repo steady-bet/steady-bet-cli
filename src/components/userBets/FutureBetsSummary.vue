@@ -1,7 +1,7 @@
 <template>
   <div>
     <strong>My current bets</strong>
-    <div v-bind:key="betItem.id" v-for="betItem in this.$store.getters['userFutureBets/userFutureBets']">
+    <div v-bind:key="betItem.id" v-for="betItem in this.$store.getters['userFutureBets/userFutureBetsOrderedDateDesc']">
       <futureBetItem v-bind:betItem="betItem"/>
     </div>
   </div>

@@ -147,6 +147,7 @@ export default {
               this.privateKey = null
               this.setSuccessMsg()
               if (res2.data == true) {
+                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['wallet/walletData'].address)
                 this.setSuccessMsg()
               } else {
                 this.setErrorMsg()

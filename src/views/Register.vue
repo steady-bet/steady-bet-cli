@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import MultiModalMixin from '../mixins/MultiModalMixin'
 
 export default {

@@ -38,7 +38,7 @@ export default {
   components: {
     confirmBetModal
   },
-  data() {
+  data () {
     return {
       isModalVisible: false,
       selectedBet: {
@@ -50,34 +50,34 @@ export default {
         interval: null
       },
       matchBets: []
-    };
+    }
   },
   methods: {
-    showModal() {
+    showModal () {
       this.selectedBet.smartContract = this.game.smartContract
       this.selectedBet.matchDate = this.game.schedule
       this.selectedBet.matchName = this.game.team1 + ' - ' + this.game.team2
       this.isModalVisible = true
     },
-    showModal0() {
+    showModal0 () {
       this.selectedBet.team = 0
       this.selectedBet.teamName = this.game.team1
       this.showModal()
     },
-    showModal1() {
+    showModal1 () {
       this.selectedBet.team = 1
       this.selectedBet.teamName = 'draw'
       this.showModal()
     },
-    showModal2() {
+    showModal2 () {
       this.selectedBet.team = 2
       this.selectedBet.teamName = this.game.team2
       this.showModal()
     },
-    closeModal() {
+    closeModal () {
       this.isModalVisible = false
     },
-    loadBets() {
+    loadBets () {
       restHttp
         .get(`matches/scheduled/getBetsOnScheduleMatch/${this.game.smartContract}`)
         .then(res => {
@@ -88,23 +88,23 @@ export default {
     }
   },
   computed: {
-    linkToSmart() {
+    linkToSmart () {
       return (`https://monitor.credits.com/testnet/Contract/${this.game.smartContract}`)
     }
   },
-  mounted() {    
+  mounted () {
     this.loadBets()
     this.interval = setInterval(
-      function() {
+      function () {
         this.loadBets()
       }.bind(this),
       20000
     )
   },
-  beforeDestroy() {
-    clearInterval(this.interval);
+  beforeDestroy () {
+    clearInterval(this.interval)
   }
-};
+}
 </script>
 
 <style scoped>

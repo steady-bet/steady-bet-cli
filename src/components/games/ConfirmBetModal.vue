@@ -56,7 +56,7 @@ export default {
   name: 'confirmBetModal',
   props: ['selectedBet'],
   components: {},
-  data() {
+  data () {
     return {
       amountToBet: 50,
       privateKey: '',
@@ -64,10 +64,10 @@ export default {
       betError: false,
       waiting: false,
       displayBetButton: true
-    };
+    }
   },
   methods: {
-    close() {
+    close () {
       this.amountToBet = 50
       this.privateKey = ''
       this.$emit('close')
@@ -76,22 +76,22 @@ export default {
       this.betError = false
       this.waiting = false
     },
-    setWait() {
+    setWait () {
       this.waiting = true
     },
-    setErrorMsg() {
+    setErrorMsg () {
       this.displayBetButton = true
       this.betValidated = false
       this.betError = true
       this.waiting = false
     },
-    setSuccessMsg() {
+    setSuccessMsg () {
       this.displayBetButton = false
       this.betValidated = true
       this.betError = false
       this.waiting = false
     },
-    betIt() {
+    betIt () {
       console.log(
         'do bet !!! ' + this.amountToBet + ', ' + this.$props.selectedBet.team
       )
@@ -146,7 +146,7 @@ export default {
               this.amountToBet = null
               this.privateKey = null
               this.setSuccessMsg()
-              if (res2.data == true) {
+              if (res2.data === true) {
                 this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['wallet/walletData'].address)
                 this.setSuccessMsg()
               } else {
@@ -170,7 +170,6 @@ export default {
   }
 }
 </script>
-
 
 <style>
 .modal-backdrop {

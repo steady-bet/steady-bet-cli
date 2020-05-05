@@ -80,8 +80,8 @@ export default {
     displayWallet: function (value) {
       if (!value) return ''
       value = value.toString()
-      if(value.length<12) return value
-      let result = value.substring(0,7) + '...' + value.substring(value.length-7, value.length)
+      if (value.length < 12) return value
+      let result = value.substring(0, 7) + '...' + value.substring(value.length - 7, value.length)
       return result
     }
   }

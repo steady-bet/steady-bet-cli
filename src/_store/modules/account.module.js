@@ -28,8 +28,13 @@ const actions = {
       )
   },
   logout ({ commit }) {
-    userService.logout()
     commit('logout')
+    userService.logout()
+    commit('wallet/changeWallet', '', { root: true })
+    commit('wallet/updateBalance', 0.0, { root: true })
+    commit('userFutureBets/updateBets', {}, { root: true })
+    console.log('logout ok')
+    router.push('/')
   },
   register ({ dispatch, commit }, user) {
     commit('registerRequest', user)

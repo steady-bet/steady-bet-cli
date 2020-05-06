@@ -32,7 +32,7 @@ const actions = {
     userService.logout()
     commit('wallet/changeWallet', '', { root: true })
     commit('wallet/updateBalance', 0.0, { root: true })
-    commit('userFutureBets/updateBets', {}, { root: true })
+    commit('userFutureBets/updateBets', [], { root: true })
     console.log('logout ok')
     router.push('/')
   },

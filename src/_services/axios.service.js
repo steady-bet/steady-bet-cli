@@ -1,8 +1,10 @@
 import axios from 'axios'
+import config from '../config.json'
+// const config = require('./config.json')
 
 export const restHttp = axios.create({
-  baseURL: 'http://deneb:8383/steady-bet-srv/',
-  timeout: 40000,
+  baseURL: `http://${config.host}:${config.port}/${config.context}/`,
+  timeout: config.timeout,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     'X-steady-bet': 'Steadybet powered by Credits'

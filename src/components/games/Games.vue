@@ -13,19 +13,18 @@ export default {
   name: 'games',
   components: { GameItem },
   props: ['games'],
-  data() {
+  data () {
     return {}
   },
   computed: {
-    sortedGames: function() {
+    sortedGames: function () {
       return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule))
     }
   },
-  created() {},
+  created () {},
   methods: {}
 }
 </script>
 
 <style scoped>
 </style>
-

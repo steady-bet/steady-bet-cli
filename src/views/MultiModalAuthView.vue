@@ -21,7 +21,7 @@ export default {
       return this.modalName !== ''
     }
   },
-  created: function() {
+  created: function () {
     console.log('MultiModalAuthView created')
   }
 }

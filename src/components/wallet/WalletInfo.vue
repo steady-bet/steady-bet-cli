@@ -1,7 +1,7 @@
 <template>
   <div v-if="walletSetMode === true">
     <div class="balance">
-      balance : {{walletInfo.balance.toFixed(3)}} CS
+      balance : {{walletInfo.balance | toCredits}}
     </div>
   </div>
   <div v-else>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="balance">
-      balance : {{ this.$store.getters['wallet/walletData'].csBalance.toFixed(3) }} CS
+      balance : {{ this.$store.getters['wallet/walletData'].csBalance | toCredits }}
     </div>
   </div>
 </template>
@@ -80,8 +80,8 @@ export default {
     displayWallet: function (value) {
       if (!value) return ''
       value = value.toString()
-      if(value.length<12) return value
-      let result = value.substring(0,7) + '...' + value.substring(value.length-7, value.length)
+      if (value.length < 12) return value
+      let result = value.substring(0, 7) + '...' + value.substring(value.length - 7, value.length)
       return result
     }
   }

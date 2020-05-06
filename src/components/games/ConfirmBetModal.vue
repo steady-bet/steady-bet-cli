@@ -15,7 +15,7 @@
         </header>
         <section class="modal-body">
           <slot name="body">
-            Token available : {{ $store.getters['wallet/walletData'].csBalance }} CS
+            Token available : {{ $store.getters['wallet/walletData'].csBalance | toCredits }}
             <div v-if="!betValidated">
               <br>
               <input

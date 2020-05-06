@@ -14,7 +14,7 @@ Vue.filter('toCredits', function (value) {
   if (typeof value !== 'number') {
     return value
   }
-  return `${value} CS`
+  return `${value.toFixed(2)} CS`
 })
 
 new Vue({

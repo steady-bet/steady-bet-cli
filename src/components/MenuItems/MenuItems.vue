@@ -43,7 +43,7 @@ export default {
         .catch(e => console.log(e))
     },
     onNodeSelected (node) {
-      console.log(node.text + ' , ' + node.data.catFinal)
+      console.log(node.text + ' , ' + node.id)
       if (!node.hasChildren()) {
         this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png')
       } else {

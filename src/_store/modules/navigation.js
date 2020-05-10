@@ -1,24 +1,32 @@
 const state = {
   lastSeen: {
-    scheduleCategory: ''
+    scheduleCategoryId: '',
+    scheduleCategoryText: ''
   }
 }
 
 const mutations = {
-  changeLastScheduleCategory (state, id) {
-    state.lastSeen.scheduleCategory = id
+  changeLastScheduleCategoryId (state, id) {
+    state.lastSeen.scheduleCategoryId = id
+  },
+  changeLastScheduleCategoryText (state, text) {
+    state.lastSeen.scheduleCategoryText = text
   }
 
 }
 
 const getters = {
-  lastscheduleCategorySeen: state => state.lastSeen.scheduleCategory
+  lastscheduleCategoryIdSeen: state => state.lastSeen.scheduleCategoryId,
+  lastscheduleCategoryTextSeen: state => state.lastSeen.scheduleCategoryText
 }
 
 const actions = {
-  setLastCategorySeen ({ commit }, id) {
-    commit('changeLastScheduleCategory', id)
-  }
+  setLastCategorySeenId ({ commit }, id) {
+    commit('changeLastScheduleCategoryId', id)
+  },
+  setLastCategorySeenText ({ commit }, atext) {
+    commit('changeLastScheduleCategoryText', atext)
+  }  
 }
 
 export const navigation = {

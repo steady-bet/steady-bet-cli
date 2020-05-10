@@ -39,18 +39,12 @@ export default {
     selectNode (id, hasChildren) {
       console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
-        this.$store.dispatch('navigation/setLastCategorySeen', id)
+        
         restHttp
           .get(`matches/scheduled/${id}`)
           .then(res => (this.games = res.data))
           .catch(e => console.log(e))
       }
-    }
-  },
-  mounted () {
-    console.log('mounted : home '+this.$store.getters['navigation/lastscheduleCategorySeen'])
-    if(this.$store.getters['navigation/lastscheduleCategorySeen'] !== '') {
-      this.selectNode (this.$store.getters['navigation/lastscheduleCategorySeen'], false)
     }
   }
 }

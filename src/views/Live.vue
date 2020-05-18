@@ -1,5 +1,5 @@
 <template>
-  <div class="live">
+  <div>
 
       <div>
         <b>live events</b>
@@ -37,9 +37,4 @@ export default {
 </script>
 
 <style scoped>
-.live {
-  background: #111;
-  color: yellow;
-}
-
 </style>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <img class="catlogo" v-bind:src="logoPath"/>
-  <tree :data="treeData" :options="treeOptions" @node:selected="onNodeSelected"/>
+  <tree :data="treeData" :options="treeOptions" ref="categoryTree" @node:selected="onNodeSelected"/>
 </div>
 </template>
 
@@ -34,6 +34,18 @@ export default {
   },
   created () {
     this.getCategories()
+    console.log('mounted expended')
+    this.getCategories().then(res => {
+      console.log(res)
+      console.log(console.log(this.$refs.categoryTree))
+      if (this.$refs.categoryTree) {
+        console.log(this.$refs)
+        this.$refs.categoryTree.tree.expandAll()
+        console.log(this.$store.getters['navigation/lastscheduleCategoryTextSeen'])
+        var plNode = this.$refs.categoryTree.find({ text: this.$store.getters['navigation/lastscheduleCategoryTextSeen'] })
+        plNode.select()
+      }
+    })
   },
   methods: {
     getCategories () {
@@ -43,7 +55,9 @@ export default {
         .catch(e => console.log(e))
     },
     onNodeSelected (node) {
-      console.log(node.text + ' , ' + node.data.catFinal)
+      console.log('select : ' + node.text + ' , ' + node.id)
+      this.$store.dispatch('navigation/setLastCategorySeenId', node.id)
+      this.$store.dispatch('navigation/setLastCategorySeenText', node.text)
       if (!node.hasChildren()) {
         this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png')
       } else {

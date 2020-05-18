@@ -2,7 +2,7 @@
   <div class="bet-item">
     {{ betItem.pk.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss").format("L") }} {{betItem.matchName}}
     <br>
-    <strong>{{betItem.betName}} {{betItem.betAmount}} </strong>
+    <strong>{{betItem.betName}} : {{betItem.betAmount}} CS </strong>
   </div>
 </template>
 

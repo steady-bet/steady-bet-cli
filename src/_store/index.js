@@ -6,6 +6,7 @@ import { wallet } from './modules/wallet'
 import { account } from './modules/account.module'
 import { alert } from './modules/alert.module'
 import { userFutureBets } from './modules/userFutureBets'
+import { navigation } from './modules/navigation'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const modules = {
   wallet,
   account,
   alert,
-  userFutureBets
+  userFutureBets,
+  navigation
 }
 
 export const store = new Vuex.Store({

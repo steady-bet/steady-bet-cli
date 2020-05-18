@@ -1,6 +1,6 @@
 <template>
   <div class="game-item">
-    <p>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").format("LLLL") }}</p>
+    <p><b>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").format("LLLL") }}</b></p>
     <div class="item-table">
       <div>
         <img class="crest crest-left" v-bind:src="game.crestUrlTeam1">

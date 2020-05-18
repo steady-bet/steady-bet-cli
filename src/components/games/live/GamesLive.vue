@@ -29,7 +29,9 @@ export default {
   },
   props: ['games'],
   data () {
-    return {}
+    return {
+      myFutureBets: []
+    }
   },
   computed: {
     sortedGames: function () {

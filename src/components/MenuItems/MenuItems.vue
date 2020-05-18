@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       logoPath: require('../../assets/empty.png'),
-      // categories: [],
+      categories: [],
       falseValue: false,
       trueValue: true,
       treeData: this.getCategories(),
@@ -37,32 +37,19 @@ export default {
       console.log(res)
       if (this.$refs.categoryTree) {
         console.log(this.$refs)
-        this.$refs.categoryTree.tree.expandAll()
         var plNode = this.$refs.categoryTree.find({ text: 'Premier League' })
         if (plNode) {
-          console.log('plNode=')
           console.log(plNode)
-          console.log(`plNode.id=${plNode[0].id}`)
-          console.log(plNode.length)
-          plNode[0].select(true)
-          var parents = []
-          var parent = plNode[0].parent
-          if (parent) parents.unshift(parent[0])
+          var parent = plNode.parent
           while (parent) {
-            console.log('parent=')
-            console.log(parent)
-            parent = parent[0].parent
-            if (parent) parents.unshift(parent)
+            console.log(`parent=${parent}`)
+            parent.expand()
+            parent = parent.parent
           }
-          for (const p of parents) {
-            console.log(p)
-            p.expand()
-          }
-          // console.log(plNode.text) // + ' , ' + plNode.data.catFinal)
+          plNode.select(true)
         }
       }
-      // this.$emit('nodeSelected', 2014, false)
-    }).catch(e => console.log(e))
+    })
   },
   methods: {
     getCategories () {

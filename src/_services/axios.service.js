@@ -1,6 +1,5 @@
 import axios from 'axios'
-import config from '/etc/steadybet/config-cli.json'
-// const config = require('./config.json')
+import config from './config.json'
 
 export const restHttp = axios.create({
   baseURL: `http://${config.host}:${config.port}/${config.context}/`,

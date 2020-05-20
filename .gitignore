@@ -3,6 +3,7 @@ node_modules
 /dist
 /.settings
 .project
+config.json
 
 # local env files
 .env.local

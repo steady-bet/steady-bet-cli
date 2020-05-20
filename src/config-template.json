@@ -1,5 +1,5 @@
 {
-	"host": "62.171.139.39",
+	"host": "dev.steadybet.io",
     "port": "8383",
     "context": "steady-bet-srv",
     "timeout": 40000

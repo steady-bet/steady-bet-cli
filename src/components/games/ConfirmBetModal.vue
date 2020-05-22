@@ -58,7 +58,7 @@ export default {
   components: {},
   data () {
     return {
-      amountToBet: 50,
+      amountToBet: 2,
       privateKey: '',
       betValidated: false,
       betError: false,

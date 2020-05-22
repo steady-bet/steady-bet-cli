@@ -27,6 +27,7 @@ export default {
   computed: {
     sortedBetItems: function () {
       // reverse order by match date
+      // eslint-disable-next-line
       return this.bets.sort(
         (a, b) => new Date(b.matchDate) - new Date(a.matchDate)
       )

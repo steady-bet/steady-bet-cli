@@ -61,8 +61,8 @@ export default {
   mixins: [MultiModalMixin],
   data () {
     return {
-      username: 'raymond@steadybet.io',
-      password: 'wwwwww',
+      username: '',
+      password: '',
       submitted: false
     }
   },

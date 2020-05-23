@@ -47,7 +47,7 @@
         That's why if you loose your PIN code we just can't unlock anymore your server side wallet. </p>
         <p> This is a general behaviour to have, try to always split your amount of crypto into smaller wallet, moreover when you fill private keys on website. 
           For exemple, if you use and external wallet and fill private key for betting or if you use our server side wallet, feel free when balance is high to send back funds to one of your main wallets.
-          This is true here but on any crypto website</p>
+          This is true here but on any crypto website.</p>
     <h2>What are the features on which the team is currently working on ?</h2>
     <ul>
       <li>

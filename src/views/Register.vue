@@ -95,13 +95,14 @@ export default {
   data () {
     return {
       user: {
-        username: 'raymond@steadybet.io',
-        email: 'raymond@steadybet.io',
-        pseudo: 'raymond',
+        username: '',
+        pseudo: '',
         // wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
         // wallet: 'Axbxj5oKyDjJg1rtcDNmnxmK36EDHtWA6wQjDDUjxgkF',
-        wallet: 'Eyh6ZBiM9D9yyLDwFG7nqAwgm8fFfJn7NauZ6bQxsufn',
-        password: 'wwwwww',
+        wallet: '',
+        password: '',
+        pinCode: '',
+        useInternalWallet: false,
         roles: ['USER']
       },
       submitted: false
@@ -159,7 +160,7 @@ export default {
 }
 .btn {
     display:inline-block;
-    font-weight:400;
+    font-weight:00;
     text-align:center;
     white-space:nowrap;
     vertical-align:middle;

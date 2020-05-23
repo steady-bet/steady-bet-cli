@@ -53,13 +53,13 @@ const actions = {
       .catch(e => console.log(e))
     */
   },
-  updateBalance({ commit }, address) {
+  updateBalance ({ commit }, address) {
     restHttp
-    .get('wallet/' + address)
-    .then(res => {
-      let walletInfo = res.data
-      commit('updateBalance', walletInfo.balance)
-    }).catch(e => console.log(e))
+      .get('wallet/' + address)
+      .then(res => {
+        let walletInfo = res.data
+        commit('updateBalance', walletInfo.balance)
+      }).catch(e => console.log(e))
   }
 }
 

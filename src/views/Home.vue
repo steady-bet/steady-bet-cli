@@ -39,7 +39,6 @@ export default {
     selectNode (id, hasChildren) {
       console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
-        
         restHttp
           .get(`matches/scheduled/${id}`)
           .then(res => (this.games = res.data))

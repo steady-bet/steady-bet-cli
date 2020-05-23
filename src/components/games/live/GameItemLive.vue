@@ -11,7 +11,7 @@
           <strong>{{game.team1}}</strong>
         </div>
         <div class="rate-left">{{game.team1Goals}}</div>
-        <div class="rate-left">{{game.rateteam1 ? game.rateteam1.toFixed(2)+'%' : '-'}}</div>
+        <div class="rate-left">{{game.rateTeam1 ? game.rateTeam1.toFixed(2)+'%' : '-'}}</div>
       </div>
       <div class="middle">
         <div>DRAW</div>
@@ -21,7 +21,7 @@
       <div class="right">
         <strong>{{game.team2}}</strong>
         <div class="rate-right">{{game.team2Goals}}</div>
-        <div class="rate-right">{{game.rateteam2 ? game.rateteam2.toFixed(2)+'%' : '-'}}</div>
+        <div class="rate-right">{{game.rateTeam2 ? game.rateTeam2.toFixed(2)+'%' : '-'}}</div>
       </div>
       <div>
         <img class="crest crest-right" v-bind:src="game.crestUrlTeam2">

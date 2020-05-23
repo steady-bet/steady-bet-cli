@@ -97,11 +97,12 @@ export default {
       user: {
         username: '',
         pseudo: '',
+        email: 'notused@notused.com',
         // wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
         // wallet: 'Axbxj5oKyDjJg1rtcDNmnxmK36EDHtWA6wQjDDUjxgkF',
         wallet: '',
         password: '',
-        pinCode: '',
+        pinCode: '123456',
         useInternalWallet: false,
         roles: ['USER']
       },

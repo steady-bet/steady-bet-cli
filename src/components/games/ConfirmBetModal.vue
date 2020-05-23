@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { restHttp } from '../../_services/axios.service'
 import nacl from 'tweetnacl'
 import bs58 from 'bs58'
@@ -67,6 +68,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('wallet', ['updateBalance']),
     close () {
       this.amountToBet = 50
       this.privateKey = ''
@@ -148,6 +150,7 @@ export default {
               this.setSuccessMsg()
               if (res2.data === true) {
                 this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['wallet/walletData'].address)
+                this.updateBalance(this.$store.getters['wallet/walletData'].address)
                 this.setSuccessMsg()
               } else {
                 this.setErrorMsg()

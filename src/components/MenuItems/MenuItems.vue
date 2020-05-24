@@ -43,7 +43,7 @@ export default {
         this.$refs.categoryTree.tree.expandAll()
         console.log(this.$store.getters['navigation/lastscheduleCategoryTextSeen'])
         var plNode = this.$refs.categoryTree.find({ text: this.$store.getters['navigation/lastscheduleCategoryTextSeen'] })
-        plNode.select()
+        if (plNode) plNode.select()
       }
     })
   },

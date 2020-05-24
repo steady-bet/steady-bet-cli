@@ -7,9 +7,11 @@
     <h2>TOTALS</h2>
     <div class="bet-item">
           <dl>
-            <dt>TOTAL BETS</dt>
+            <dt>TOTAL BETS TO COME</dt>
+            <dd><strong>{{totalAmounts.totalFuture | toCredits }}</strong></dd>
+            <dt>TOTAL BETS DONE</dt>
             <dd><strong>{{totalAmounts.totalBetAmount | toCredits }}</strong></dd>
-            <dt>TOTAL PAYOUT</dt>
+            <dt>TOTAL PAYOUT DONE</dt>
             <dd><strong>{{totalAmounts.totalPayout | toCredits }}</strong></dd>
             <dt >GLOBAL BET BALANCE</dt>
             <dd>
@@ -49,11 +51,17 @@ export default {
       var totals = {
         totalBetAmount: 0.0,
         totalPayout: 0.0,
+        totalFuture: 0.0,
         balance: 0.0
       }
       this.bets.forEach(bet => {
-        totals.totalBetAmount += bet.totalBetAmount
-        totals.totalPayout += (bet.payout !== -1 ? bet.payout : 0.0)
+        // if match is closed and payout is done
+        if (bet.status === 2 && bet.payoutStatus === 1) {
+          totals.totalBetAmount += bet.totalBetAmount
+          totals.totalPayout += (bet.payout !== -1 ? bet.payout : 0.0)
+        } else if (bet.status === 0 || bet.status === 1) {
+          totals.totalFuture += bet.totalBetAmount
+        }
       })
       totals.balance = totals.totalPayout - totals.totalBetAmount
       return totals

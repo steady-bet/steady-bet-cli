@@ -18,6 +18,7 @@ export default {
   },
   computed: {
     sortedGames: function () {
+      // eslint-disable-next-line
       return this.games.sort((a, b) => new Date(a.schedule) - new Date(b.schedule))
     }
   },

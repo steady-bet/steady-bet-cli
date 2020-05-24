@@ -49,6 +49,7 @@ export default {
   methods: {
     ...mapActions('multiModal', ['showModalLogin', 'showModalRegister']),
     ...mapActions('account', ['logout']),
+    ...mapActions('wallet', ['setWallet']),
     disconnect () {
       this.logout()
     }
@@ -63,7 +64,13 @@ export default {
       }
     }
   },
-  created () {}
+  created () {
+    // if the user is already in localStorage update wallet info in header
+    var user = JSON.parse(localStorage.getItem('user'))
+    if (user && user.wallet && localStorage.getItem('access_token')) {
+      this.setWallet(user.wallet)
+    }
+  }
 }
 </script>
 

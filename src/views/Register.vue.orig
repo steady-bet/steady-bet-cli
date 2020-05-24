@@ -51,6 +51,14 @@
               class="invalid-feedback"
             >{{ errors.first('wallet') }}</div>
           </div>
+          <div clasee="form-group">
+            <input
+              type="checkbox"
+              name="useInternalWallet"
+              v-model="user.useInternalWallet"
+            />
+            <label for="useInternalWallet">Use server side wallet to send bet</label>
+          </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input
@@ -82,14 +90,6 @@
               class="invalid-feedback"
             >{{ errors.first('pinCode') }}</div>
           </div>
-          <div clasee="form-group">
-            <input
-              type="checkbox"
-              name="useInternalWallet"
-              v-model="user.useInternalWallet"
-            />
-            <label for="useInternalWallet">If checked, use server your side wallet to send bet</label>
-          </div>          
           <div class="form-group">
             <button class="btn btn-primary" :disabled="status.registering">Register</button>
             <img
@@ -120,12 +120,19 @@ export default {
       user: {
         username: '',
         pseudo: '',
+<<<<<<< HEAD
+=======
         email: 'notused@notused.com',
+>>>>>>> micmac
         // wallet: '3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi',
         // wallet: 'Axbxj5oKyDjJg1rtcDNmnxmK36EDHtWA6wQjDDUjxgkF',
         wallet: '',
         password: '',
+<<<<<<< HEAD
         pinCode: '',
+=======
+        pinCode: '123456',
+>>>>>>> micmac
         useInternalWallet: false,
         roles: ['USER']
       },

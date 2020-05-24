@@ -11,7 +11,7 @@
         <FutureBetsSummary v-bind:myFutureBets="myFutureBets"/>
       </div>
     </div>
-    <p class="testHalfHiden">wallets test reminder : 3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi</p>
+    <p class="testHalfHiden">wallet test reminder : 3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi</p>
   </div>
 </template>
 
@@ -39,7 +39,6 @@ export default {
     selectNode (id, hasChildren) {
       console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
       if (!hasChildren) {
-        
         restHttp
           .get(`matches/scheduled/${id}`)
           .then(res => (this.games = res.data))

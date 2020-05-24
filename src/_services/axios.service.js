@@ -1,10 +1,8 @@
 import axios from 'axios'
-import config from '/etc/steadybet/config-cli.json'
-// const config = require('./config.json')
 
 export const restHttp = axios.create({
-  baseURL: `http://${config.host}:${config.port}/${config.context}/`,
-  timeout: config.timeout,
+  baseURL: `http://${process.env.VUE_APP_HOST}:${process.env.VUE_APP_PORT}/${process.env.VUE_APP_CONTEXT}/`,
+  timeout: process.env.VUE_APP_TIMEOUT,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     'X-steady-bet': 'Steadybet powered by Credits'

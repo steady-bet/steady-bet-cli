@@ -1,6 +1,7 @@
 <template>
   <div class="game-item">
-    <p><b>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss").format("LLLL") }}</b></p>
+    <p><b>{{ game.schedule | moment(false, "MM-DD-YYYYTHH:mm:ss") }}</b></p>
+    <p>Total amount in game : {{ getTotalBet }} CS</p>
     <div class="item-table">
       <div>
         <img class="crest crest-left" v-bind:src="game.crestUrlTeam1">
@@ -82,7 +83,6 @@ export default {
         .get(`matches/scheduled/getBetsOnScheduleMatch/${this.game.smartContract}`)
         .then(res => {
           this.matchBets = res.data
-          console.log(this.matchBets.totalHome)
         })
         .catch(e => console.log(e))
     }
@@ -90,6 +90,9 @@ export default {
   computed: {
     linkToSmart () {
       return (`https://monitor.credits.com/testnet/Contract/${this.game.smartContract}`)
+    },
+    getTotalBet : function(){
+      return this.matchBets.totalHome+this.matchBets.totalDraw+this.matchBets.totalAway;
     }
   },
   mounted () {

@@ -1,10 +1,7 @@
 <template>
   <div>
     <h1>Bet history</h1>
-    <div v-bind:key="betItem.id" v-for="betItem in sortedBetItems">
-      <BetHistoryItem v-bind:bet="betItem" />
-    </div>
-    <h2>TOTALS</h2>
+    <h3>Summary</h3>
     <div class="bet-item">
           <dl>
             <dt>TOTAL BETS TO COME</dt>
@@ -21,6 +18,11 @@
             </dd>
           </dl>
     </div>
+    <h3>Bet details</h3>
+    <div v-bind:key="betItem.id" v-for="betItem in sortedBetItems">
+      <BetHistoryItem v-bind:bet="betItem" />
+    </div>
+    
   </div>
 </template>
 

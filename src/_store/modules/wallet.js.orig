@@ -65,6 +65,7 @@ const actions = {
       .catch(e => console.log(e))
     */
   },
+<<<<<<< HEAD
   setInternalWallet ({ commit }, address) {
     console.log('*** action setInternalWallet : adress=' + address)
     // if user is authenticated, his token is in local storage
@@ -81,12 +82,12 @@ const actions = {
   setUseInternalWallet ({ commit }, useFlag) {
     commit('updateUseInternalWallet', useFlag)
   },
-  updateBalance ({ commit }, address) {
+  updateBalance({ commit }, address) {
     restHttp
-      .get('wallet/' + address)
-      .then(res => {
-        let walletInfo = res.data
-        commit('updateBalance', walletInfo.balance)
+    .get('wallet/' + address)
+    .then(res => {
+      let walletInfo = res.data
+      commit('updateBalance', walletInfo.balance)
     }).catch(e => console.log(e))
   },
   updateInternalBalance({ commit }, address) {
@@ -95,7 +96,16 @@ const actions = {
     .then(res => {
       let walletInfo = res.data
       commit('updateInternalBalance', walletInfo.balance)
+    }).catch(e => console.log(e))
+=======
+  updateBalance ({ commit }, address) {
+    restHttp
+      .get('wallet/' + address)
+      .then(res => {
+        let walletInfo = res.data
+        commit('updateBalance', walletInfo.balance)
       }).catch(e => console.log(e))
+>>>>>>> micmac
   }
 }
 

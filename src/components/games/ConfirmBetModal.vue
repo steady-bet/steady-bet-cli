@@ -8,6 +8,9 @@
             <div class="wait-msg">
               <br>
               <span v-if="waiting" class="setborder">Wait for confirmation</span>
+              &nbsp;&nbsp;
+              <img v-if="waiting"
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
             </div>
             <p v-if="betValidated" class="success-msg">Success !!!</p>
             <p v-if="betError" class="error-msg">Error bet is canceled</p>
@@ -126,6 +129,7 @@ export default {
           restHttp
             .post('matches/scheduled/sendBetSignedWithCS/' + this.$props.selectedBet.smartContract,
               {
+                username: this.$store.getters['account/user'].username,
                 publicAddress: this.$store.getters['wallet/walletData'].address,
                 signature: signatureHex,
                 id: trxId,
@@ -149,7 +153,7 @@ export default {
               this.privateKey = null
               this.setSuccessMsg()
               if (res2.data === true) {
-                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['wallet/walletData'].address)
+                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['account/user'].username)
                 this.updateBalance(this.$store.getters['wallet/walletData'].address)
                 this.setSuccessMsg()
               } else {

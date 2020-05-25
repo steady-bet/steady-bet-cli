@@ -91,8 +91,8 @@ export default {
     linkToSmart () {
       return (`https://monitor.credits.com/testnet/Contract/${this.game.smartContract}`)
     },
-    getTotalBet : function(){
-      return this.matchBets.totalHome+this.matchBets.totalDraw+this.matchBets.totalAway;
+    getTotalBet: function () {
+      return this.matchBets.totalHome + this.matchBets.totalDraw + this.matchBets.totalAway
     }
   },
   mounted () {

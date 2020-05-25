@@ -18,7 +18,7 @@ const actions = {
             dispatch('wallet/setWallet', jwtResponse.user.wallet, { root: true })
             dispatch('wallet/setInternalWallet', jwtResponse.user.internalWallet, { root: true })
             dispatch('wallet/setUseInternalWallet', jwtResponse.user.useInternalWallet, { root: true })
-            dispatch('userFutureBets/loadBets', jwtResponse.user.wallet, { root: true })
+            dispatch('userFutureBets/loadBets', username, { root: true })
             commit('multiModal/hideModal', {}, { root: true })
             router.push('/')
           }
@@ -60,6 +60,7 @@ const actions = {
   }
 }
 
+
 const mutations = {
   loginRequest (state, user) {
     state.status = { loggedIn: true }
@@ -88,10 +89,15 @@ const mutations = {
   }
 }
 
+const getters = {
+  user: state => state.user
+}
+
 // expose account store
 export const account = {
   namespaced: true,
   state,
   actions,
+  getters,
   mutations
 }

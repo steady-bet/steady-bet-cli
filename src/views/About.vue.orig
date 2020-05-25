@@ -1,5 +1,10 @@
 <template>
   <div class="about">
+<<<<<<< HEAD
+    <h1>This is an about page</h1>
+  </div>
+</template>
+=======
     <h1>Welcome on steadybet</h1>
     <h2>How to meet the community</h2>
       Feel free to join us on <a href="https://discord.gg/H4tzwWP">discord</a>
@@ -19,13 +24,6 @@
         will be fully ready and most of the essential features implemented. Kind of Dapp ready instead of whitepaper paradigm.
       </li>
     </ul>
-    <h2>Project status</h2>
-      <p>This project is not yet stable and still under developments.</p>
-      <p>
-        We decided to publish it as main features are working (may be still with some bugs but it s possible to bet and get rewards)
-        This will also help for the most curious to follow the building of this project and also see another project working on Credits blockchain and use some smartcontracts. 
-        Credits blockchain is fast and we choose this blockchain to improve user experience and have bets working in real time.
-      </p>
     <h2>How it works</h2>
       <p>
         This is Dapp for Peer to Peer betting. That means there is no bookmakers and bet odds are directly calculated from bet made by users.
@@ -61,7 +59,7 @@
         improving and fixing existing pages
       </li>
       <li>
-        improve layout for bet history + refactoring of user bet storage
+        improve layout for bet history
       </li>
       <li>
         build the final test server
@@ -86,3 +84,4 @@
   margin-right: 20%;
 }
 </style>
+>>>>>>> micmac

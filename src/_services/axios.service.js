@@ -20,7 +20,7 @@ restHttp.interceptors.request.use(
     } else {
       delete restHttp.defaults.headers.common.Authorization
     }
-    console.log(`calling ${config.baseURL}${config.url}`)
+    console.debug(`calling ${config.baseURL}${config.url}`)
     return config
   },
   function (error) { return Promise.reject(error) }

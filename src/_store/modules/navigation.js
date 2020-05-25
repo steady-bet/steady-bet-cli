@@ -26,7 +26,7 @@ const actions = {
   },
   setLastCategorySeenText ({ commit }, atext) {
     commit('changeLastScheduleCategoryText', atext)
-  }  
+  }
 }
 
 export const navigation = {

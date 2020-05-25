@@ -11,7 +11,7 @@
         <FutureBetsSummary v-bind:myFutureBets="myFutureBets"/>
       </div>
     </div>
-    <p class="testHalfHiden">wallet test reminder : 3r57ycZuw5L2AHmNc7Tz4fnSDgJu9nv2Cc5cjmEprTUi</p>
+    <p class="testHalfHiden">&nbsp;</p>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ import MenuItems from '@/components/MenuItems/MenuItems.vue'
 import Games from '@/components/games/Games.vue'
 import FutureBetsSummary from '@/components/userBets/FutureBetsSummary.vue'
 import { restHttp } from '@/_services/axios.service'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'home',
@@ -36,14 +37,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions('userFutureBets', ['loadBets']),
+    ...mapGetters('userFutureBets', ['userFutureBetsOrderedDateDesc']),
     selectNode (id, hasChildren) {
-      console.log('parent say id is :' + id + ' and hasChildren = ' + hasChildren)
+      console.debug(`parent say id is : ${id} and hasChildren = ${hasChildren}`)
       if (!hasChildren) {
         restHttp
           .get(`matches/scheduled/${id}`)
           .then(res => (this.games = res.data))
           .catch(e => console.log(e))
       }
+    }
+  },
+  created () {
+    // if user is already connected load future bets when page is opened
+    var user = JSON.parse(localStorage.getItem('user'))
+    if (user && user.wallet && localStorage.getItem('access_token')) {
+      this.loadBets(user.wallet)
+      this.myFutureBets = this.userFutureBetsOrderedDateDesc
     }
   }
 }

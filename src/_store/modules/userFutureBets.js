@@ -22,13 +22,13 @@ const getters = {
 
 const actions = {
   loadBets ({ commit }, address) {
-    console.log('*** action loadBets : adress=' + address)
+    console.debug(`*** action loadBets : adress=${address}`)
     restHttp
-      .get('bet/' + address + '/getUserFutureBets')
+      .get(`bet/${address}/getUserFutureBets`)
       .then(res => {
         this.myFutureBets = res.data
         commit('updateBets', res.data)
-        console.log(this.myFutureBets)
+        console.debug(this.myFutureBets)
       })
       .catch(e => console.log(e))
   }

@@ -1,7 +1,7 @@
 const state = {
   lastSeen: {
-    scheduleCategoryId: '',
-    scheduleCategoryText: ''
+    scheduleCategoryId: process.env.VUE_APP_DEFAULT_TREEVIEW_NODE_ID,
+    scheduleCategoryText: process.env.VUE_APP_DEFAULT_TREEVIEW_NODE_TEXT
   }
 }
 
@@ -16,8 +16,8 @@ const mutations = {
 }
 
 const getters = {
-  lastscheduleCategoryIdSeen: state => state.lastSeen.scheduleCategoryId,
-  lastscheduleCategoryTextSeen: state => state.lastSeen.scheduleCategoryText
+  lastScheduleCategoryIdSeen: state => state.lastSeen.scheduleCategoryId,
+  lastScheduleCategoryTextSeen: state => state.lastSeen.scheduleCategoryText
 }
 
 const actions = {

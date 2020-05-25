@@ -9,6 +9,7 @@
 import { restHttp } from '../../_services/axios.service'
 import { bTreeView } from 'bootstrap-vue-treeview'
 import LiquorTree from 'liquor-tree'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'menuItems',
@@ -34,20 +35,22 @@ export default {
   },
   created () {
     this.getCategories()
-    console.log('mounted expended')
+    console.debug('mounted expended')
     this.getCategories().then(res => {
-      console.log(res)
-      console.log(console.log(this.$refs.categoryTree))
+      console.debug(res)
       if (this.$refs.categoryTree) {
-        console.log(this.$refs)
+        console.debug(this.$refs.categoryTree)
         this.$refs.categoryTree.tree.expandAll()
-        console.log(this.$store.getters['navigation/lastscheduleCategoryTextSeen'])
-        var plNode = this.$refs.categoryTree.find({ text: this.$store.getters['navigation/lastscheduleCategoryTextSeen'] })
-        if (plNode) plNode.select()
+        console.log(`lastScheduleCategoryTextSeen=${this.lastScheduleCategoryTextSeen}`)
+        var plNode = this.$refs.categoryTree.find({ text: this.lastScheduleCategoryTextSeen })
+        if (plNode) {
+          plNode.select()
+        }
       }
     })
   },
   methods: {
+    ...mapActions('navigation', ['setLastCategorySeenId', 'setLastCategorySeenText']),
     getCategories () {
       return restHttp
         .get('categories')
@@ -55,17 +58,22 @@ export default {
         .catch(e => console.log(e))
     },
     onNodeSelected (node) {
-      console.log('select : ' + node.text + ' , ' + node.id)
-      this.$store.dispatch('navigation/setLastCategorySeenId', node.id)
-      this.$store.dispatch('navigation/setLastCategorySeenText', node.text)
+      console.log(`select : ${node.text} , ${node.id}`)
+      // this.$store.dispatch('navigation/setLastCategorySeenId', node.id)
+      // this.$store.dispatch('navigation/setLastCategorySeenText', node.text)
+      this.setLastCategorySeenId(node.id)
+      this.setLastCategorySeenText(node.text)
       if (!node.hasChildren()) {
-        this.logoPath = require('../../assets/' + node.id + '_' + node.text + '.png')
+        this.logoPath = require(`../../assets/${node.id}_${node.text}.png`)
       } else {
         this.logoPath = require('../../assets/empty.png')
       }
       console.log('test children=' + node.hasChildren())
       this.$emit('nodeSelected', node.id, node.hasChildren())
     }
+  },
+  computed: {
+    ...mapGetters('navigation', ['lastScheduleCategoryTextSeen'])
   }
 }
 </script>

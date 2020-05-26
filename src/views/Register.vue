@@ -68,6 +68,29 @@
             <!--<span v-show="errors.has('password')">{{ errors.first('password') }}</span> -->
           </div>
           <div class="form-group">
+            <label for="pinCode">PinCode 6 characters alpha and numeric, Ex : A1ML5K</label>
+            <input
+              type="password"
+              size="6"
+              v-model="user.pinCode"
+              v-validate="{ required: truer, regex: /^[0-9a-zA-Z]{6}$/ }"
+              name="pinCode"
+              class="form-control"
+              :class="{ 'is-invalid': submitted && !errors.has('pincode') }"/>
+            <div v-show="errors.has('pinCode')"
+              v-if="submitted && errors.has('pinCode')"
+              class="invalid-feedback"
+            >{{ errors.first('pinCode') }}</div>
+          </div>
+          <div clasee="form-group">
+            <input
+              type="checkbox"
+              name="useInternalWallet"
+              v-model="user.useInternalWallet"
+            />
+            <label for="useInternalWallet">If checked, use server your side wallet to send bet</label>
+          </div>          
+          <div class="form-group">
             <button class="btn btn-primary" :disabled="status.registering">Register</button>
             <img
               v-show="status.registering"
@@ -102,7 +125,7 @@ export default {
         // wallet: 'Axbxj5oKyDjJg1rtcDNmnxmK36EDHtWA6wQjDDUjxgkF',
         wallet: '',
         password: '',
-        pinCode: '123456',
+        pinCode: '',
         useInternalWallet: false,
         roles: ['USER']
       },

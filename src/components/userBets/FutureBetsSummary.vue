@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>My bets on forthcoming matches</h3>
-    <div v-bind:key="betItem.id" v-for="betItem in this.userFutureBetsOrderedDateDesc">
+    <div v-bind:key="betItem.id" v-for="betItem in this.userFutureBetsOrderedDateAsc">
       <futureBetItem v-bind:betItem="betItem"/>
     </div>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: 'futureBetsSummary',
   components: { FutureBetItem },
   computed: {
-    ...mapGetters('userFutureBets', ['userFutureBetsOrderedDateDesc'])
+    ...mapGetters('userFutureBets', ['userFutureBetsOrderedDateAsc'])
   }
 }
 </script>

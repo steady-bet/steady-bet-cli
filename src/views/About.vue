@@ -19,6 +19,13 @@
         will be fully ready and most of the essential features implemented. Kind of Dapp ready instead of whitepaper paradigm.
       </li>
     </ul>
+    <h2>Project status</h2>
+      <p>This project is not yet stable and still under developments.</p>
+      <p>
+        We decided to publish it as main features are starting to work (may be still with some bugs but it s possible to bet and get rewards)
+        This will also help for the most curious to follow the building of this project and also see another project working on Credits blockchain and use some smartcontracts. 
+        Credits blockchain is fast and we choose this blockchain to improve user experience and have bets working in real time.
+      </p>
     <h2>How it works</h2>
       <p>
         This is Dapp for Peer to Peer betting. That means there is no bookmakers and bet odds are directly calculated from bet made by users.
@@ -54,7 +61,7 @@
         improving and fixing existing pages
       </li>
       <li>
-        improve layout for bet history
+        improve layout for bet history + refactoring of user bet storage
       </li>
       <li>
         build the final test server

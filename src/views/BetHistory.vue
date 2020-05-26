@@ -72,9 +72,9 @@ export default {
   methods: {
     loadBets () {
       let user = JSON.parse(localStorage.getItem('user'))
-      if (user && user.wallet) {
+      if (user && user.username) {
         restHttp
-          .get(`bet/${user.wallet}/getAllUserBets`)
+          .get(`bet/${user.username}/getAllUserBets`)
           .then(res => {
             this.bets = res.data
           })

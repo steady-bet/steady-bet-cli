@@ -21,10 +21,10 @@ const getters = {
 }
 
 const actions = {
-  loadBets ({ commit }, address) {
-    console.debug(`*** action loadBets : adress=${address}`)
+  loadBets ({ commit }, username) {
+    console.debug(`*** action loadBets : username=${username}`)
     restHttp
-      .get(`bet/${address}/getUserFutureBets`)
+      .get(`bet/${username}/getUserFutureBets`)
       .then(res => {
         this.myFutureBets = res.data
         commit('updateBets', res.data)

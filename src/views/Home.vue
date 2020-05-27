@@ -8,7 +8,7 @@
         <Games v-bind:games="games"/>
       </div>
       <div class="column3">
-        <FutureBetsSummary v-bind:myFutureBets="myFutureBets"/>
+        <FutureBetsSummary/>
       </div>
     </div>
     <p class="testHalfHiden">&nbsp;</p>

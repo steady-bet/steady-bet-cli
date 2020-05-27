@@ -32,8 +32,7 @@ export default {
   },
   data () {
     return {
-      games: [],
-      myFutureBets: []
+      games: []
     }
   },
   methods: {
@@ -53,8 +52,7 @@ export default {
     // if user is already connected load future bets when page is opened
     var user = JSON.parse(localStorage.getItem('user'))
     if (user && user.wallet && localStorage.getItem('access_token')) {
-      this.loadBets(user.wallet)
-      this.myFutureBets = this.userFutureBetsOrderedDateDesc
+      this.loadBets(user.username)
     }
   }
 }

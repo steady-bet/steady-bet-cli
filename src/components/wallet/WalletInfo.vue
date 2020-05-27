@@ -6,8 +6,10 @@
   </div>
   <div v-else>
     <div class="inline">
-      <div class="inline-yellow">wallet : {{ this.$store.getters['wallet/walletData'].address | displayWallet }}</div>
+      <div class="inline-yellow">personal wallet : {{ this.$store.getters['wallet/walletData'].address | displayWallet }} : </div>
+      <div class="inline-yellow">{{ this.$store.getters['wallet/walletData'].csBalance | toCredits }} </div>
       <div class="inline-red" @click="enableWalletSetMode">
+       
         <!--
         &nbsp;
         <v-icon name="exchange-alt"/>
@@ -15,7 +17,14 @@
       </div>
     </div>
     <div class="balance">
-      balance : {{ this.$store.getters['wallet/walletData'].csBalance | toCredits }}
+       <div class="inline-red">steady wallet : {{ this.$store.getters['wallet/walletData'].internalAddress | displayWallet }} : </div>
+       <div class="inline-red">{{ this.$store.getters['wallet/walletData'].internalBalance | toCredits }} </div>
+    </div>
+    <div v-if="this.$store.getters['wallet/walletData'].useInternalWallet === false" class="inline-yellow" >
+      personal wallet selected for bets
+    </div>
+    <div v-else class="inline-red">
+      steady wallet selected for bets
     </div>
   </div>
 </template>

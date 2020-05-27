@@ -129,6 +129,7 @@ export default {
           restHttp
             .post('matches/scheduled/sendBetSignedWithCS/' + this.$props.selectedBet.smartContract,
               {
+                username: this.$store.getters['account/user'].username,
                 publicAddress: this.$store.getters['wallet/walletData'].address,
                 signature: signatureHex,
                 id: trxId,
@@ -152,7 +153,7 @@ export default {
               this.privateKey = null
               this.setSuccessMsg()
               if (res2.data === true) {
-                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['wallet/walletData'].address)
+                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['account/user'].username)
                 this.updateBalance(this.$store.getters['wallet/walletData'].address)
                 this.setSuccessMsg()
               } else {

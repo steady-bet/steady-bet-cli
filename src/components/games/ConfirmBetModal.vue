@@ -6,11 +6,13 @@
           <slot name="header">
             Let's bet for {{selectedBet.teamName}} !!!
             <div class="wait-msg">
-              <br>
+              <br />
               <span v-if="waiting" class="setborder">Wait for confirmation</span>
               &nbsp;&nbsp;
-              <img v-if="waiting"
-                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+              <img
+                v-if="waiting"
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+              />
             </div>
             <p v-if="betValidated" class="success-msg">Success !!!</p>
             <p v-if="betError" class="error-msg">Error bet is canceled</p>
@@ -18,24 +20,40 @@
         </header>
         <section class="modal-body">
           <slot name="body">
-            Token available : {{ $store.getters['wallet/walletData'].csBalance | toCredits }}
+            <p
+              v-if="$store.getters['wallet/walletData'].useInternalWallet"
+            >Token available : {{ $store.getters['wallet/walletData'].internalBalance | toCredits }}</p>
+            <p
+              v-else
+            >Token available : {{ $store.getters['wallet/walletData'].csBalance | toCredits }}</p>
             <div v-if="!betValidated">
-              <br>
+              <br />
               <input
                 id="amountToBet"
                 v-model="amountToBet"
                 type="number"
                 :min="1"
                 :max="$store.getters['wallet/walletData'].csBalance"
-              >
-              <br>
-              <br>
+              />
+              <br />
+              <br />
               <input
+                v-if="$store.getters['wallet/walletData'].useInternalWallet == false"
                 id="privateKey"
                 v-model="privateKey"
                 type="text"
                 placeholder="privateKey needed to sign and confirm transaction"
-              >
+              />
+              <div v-if="$store.getters['wallet/walletData'].useInternalWallet">
+                <label for="pinCode">PinCode</label>
+                <input
+                  type="password"
+                  size="6"
+                  v-model="pinCode"
+                  v-validate="{ required: truer, regex: /^[0-9a-zA-Z]{6}$/ }"
+                  name="pinCode"
+                />
+              </div>
             </div>
           </slot>
         </section>
@@ -64,6 +82,7 @@ export default {
     return {
       amountToBet: 2,
       privateKey: '',
+      pinCode: '',
       betValidated: false,
       betError: false,
       waiting: false,
@@ -73,7 +92,7 @@ export default {
   methods: {
     ...mapActions('wallet', ['updateBalance']),
     close () {
-      this.amountToBet = 50
+      this.amountToBet = 2
       this.privateKey = ''
       this.$emit('close')
       this.displayBetButton = true
@@ -101,78 +120,123 @@ export default {
         'do bet !!! ' + this.amountToBet + ', ' + this.$props.selectedBet.team
       )
       this.setWait()
-      restHttp
-        .get('matches/scheduled/getNewMatchBetToSignWithCS/' +
-            this.$props.selectedBet.smartContract +
-            '?publicAddress=' +
-            this.$store.getters['wallet/walletData'].address +
-            '&selectedTeam=' +
-            this.$props.selectedBet.team +
-            '&amount=' +
-            this.amountToBet
-        )
-        .then(res => {
-          var signatureHex = ''
-          var trxId
-          trxId = res.data.transactionId
-          console.log('private ' + this.privateKey)
-          var keyByte = bs58.decode(this.privateKey)
-          console.log(trxId)
-          console.log(res.data.hexaToSign)
-
-          var signature = nacl.sign.detached(
-            Buffer.from(res.data.hexaToSign, 'hex'),
-            keyByte
+      if (
+        this.$store.getters['wallet/walletData'].useInternalWallet === false
+      ) {
+        restHttp
+          .get(
+            'matches/scheduled/getNewMatchBetToSignWithCS/' +
+              this.$props.selectedBet.smartContract +
+              '?publicAddress=' +
+              this.$store.getters['wallet/walletData'].address +
+              '&selectedTeam=' +
+              this.$props.selectedBet.team +
+              '&amount=' +
+              this.amountToBet
           )
-          var signatureBuff = new Buffer(signature)
-          signatureHex = signatureBuff.toString('hex')
-          restHttp
-            .post('matches/scheduled/sendBetSignedWithCS/' + this.$props.selectedBet.smartContract,
-              {
-                username: this.$store.getters['account/user'].username,
-                publicAddress: this.$store.getters['wallet/walletData'].address,
-                signature: signatureHex,
-                id: trxId,
-                selectedTeam: this.$props.selectedBet.team,
-                amount: this.amountToBet,
-                matchDateUtc: this.$props.selectedBet.matchDate,
-                selectedTeamName: this.$props.selectedBet.teamName,
-                matchName: this.$props.selectedBet.matchName
-              }
-              /*,
-              {
-                headers: {
-                  "Content-Type": "application/json"
-                }
-              }
-              */
+          .then(res => {
+            var signatureHex = ''
+            var trxId
+            trxId = res.data.transactionId
+            console.log('private ' + this.privateKey)
+            var keyByte = bs58.decode(this.privateKey)
+            console.log(trxId)
+            console.log(res.data.hexaToSign)
+
+            var signature = nacl.sign.detached(
+              Buffer.from(res.data.hexaToSign, 'hex'),
+              keyByte
             )
-            .then(res2 => {
-              console.log('result transaction  : ' + res2.data)
-              this.amountToBet = null
-              this.privateKey = null
-              this.setSuccessMsg()
-              if (res2.data === true) {
-                this.$store.dispatch('userFutureBets/loadBets', this.$store.getters['account/user'].username)
-                this.updateBalance(this.$store.getters['wallet/walletData'].address)
+            var signatureBuff = new Buffer(signature)
+            signatureHex = signatureBuff.toString('hex')
+            restHttp
+              .post(
+                'matches/scheduled/sendBetSignedWithCS/' +
+                  this.$props.selectedBet.smartContract,
+                {
+                  username: this.$store.getters['account/user'].username,
+                  publicAddress: this.$store.getters['wallet/walletData']
+                    .address,
+                  signature: signatureHex,
+                  id: trxId,
+                  selectedTeam: this.$props.selectedBet.team,
+                  amount: this.amountToBet,
+                  matchDateUtc: this.$props.selectedBet.matchDate,
+                  selectedTeamName: this.$props.selectedBet.teamName,
+                  matchName: this.$props.selectedBet.matchName
+                }
+              )
+              .then(res2 => {
+                console.log('result transaction  : ' + res2.data)
+                this.amountToBet = null
+                this.privateKey = null
                 this.setSuccessMsg()
-              } else {
+                if (res2.data === true) {
+                  this.$store.dispatch(
+                    'userFutureBets/loadBets',
+                    this.$store.getters['account/user'].username
+                  )
+                  this.updateBalance(
+                    this.$store.getters['wallet/walletData'].address
+                  )
+                  this.setSuccessMsg()
+                } else {
+                  this.setErrorMsg()
+                }
+              })
+              .catch(e => {
+                console.log(e)
+                this.privateKey = null
+                this.amountToBet = null
                 this.setErrorMsg()
-              }
-            })
-            .catch(e => {
-              console.log(e)
-              this.privateKey = null
-              this.amountToBet = null
+              })
+          })
+          .catch(e => {
+            console.log(e)
+            this.privateKey = null
+            this.amountToBet = null
+            this.setErrorMsg()
+          })
+      } else {
+        restHttp
+          .post(
+            'matches/scheduled/sendBetWithServerWallet/' +
+              this.$props.selectedBet.smartContract,
+            {
+              username: this.$store.getters['account/user'].username,
+              selectedTeam: this.$props.selectedBet.team,
+              amount: this.amountToBet,
+              matchDateUtc: this.$props.selectedBet.matchDate,
+              selectedTeamName: this.$props.selectedBet.teamName,
+              matchName: this.$props.selectedBet.matchName,
+              pinCode: this.pinCode
+            }
+          )
+          .then(res2 => {
+            console.log('result transaction  : ' + res2.data)
+            this.amountToBet = null
+            this.privateKey = null
+            this.setSuccessMsg()
+            if (res2.data === true) {
+              this.$store.dispatch(
+                'userFutureBets/loadBets',
+                this.$store.getters['account/user'].username
+              )
+              this.updateBalance(
+                this.$store.getters['wallet/walletData'].address
+              )
+              this.setSuccessMsg()
+            } else {
               this.setErrorMsg()
-            })
-        })
-        .catch(e => {
-          console.log(e)
-          this.privateKey = null
-          this.amountToBet = null
-          this.setErrorMsg()
-        })
+            }
+          })
+          .catch(e => {
+            console.log(e)
+            this.privateKey = null
+            this.amountToBet = null
+            this.setErrorMsg()
+          })
+      }
     }
   }
 }

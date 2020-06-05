@@ -27,6 +27,7 @@
         Credits blockchain is fast and we choose this blockchain to improve user experience and have bets working in real time.
       </p>
     <h2>How it works</h2>
+      <p>Here is a testnet version, so be sure to create a wallet on testnet network and hold some CS there.</p>
       <p>
         This is Dapp for Peer to Peer betting. That means there is no bookmakers and bet odds are directly calculated from bet made by users.
         At first there, when match and smartcontract is just created the screen do not display any odd. When first user bet on a team, this team will be marked

@@ -24,7 +24,7 @@
         <img class="crest crest-right" v-bind:src="game.crestUrlTeam2">
       </div>
     </div>
-    <a class="linkSM" v-bind:href="linkToSmart">{{game.smartContract}}</a>
+    <a class="linkSM" target="_blank" rel="noopener noreferrer" v-bind:href="linkToSmart">{{game.smartContract}}</a>
     <confirmBetModal v-bind:selectedBet="selectedBet" v-show="isModalVisible" @close="closeModal"/>
   </div>
 </template>

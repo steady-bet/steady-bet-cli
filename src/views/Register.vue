@@ -37,7 +37,7 @@
             >{{ errors.first('pseudo') }}</div>
           </div>
           <div class="form-group">
-            <label for="wallet">Wallet address</label>
+            <label for="wallet">your CS wallet address</label>
             <input
               type="text"
               size="50"
@@ -68,13 +68,14 @@
             <!--<span v-show="errors.has('password')">{{ errors.first('password') }}</span> -->
           </div>
           <div class="form-group">
-            <label for="pinCode">PinCode 6 characters alpha and numeric, Ex : A1ML5K</label>
+            <label for="pinCode">PinCode (6 length) for internal wallet</label><p>
             <input
               type="password"
               size="6"
               v-model="user.pinCode"
               v-validate="{ required: truer, regex: /^[0-9a-zA-Z]{6}$/ }"
               name="pinCode"
+              placeholder="123ABC"
               class="form-control"
               :class="{ 'is-invalid': submitted && !errors.has('pincode') }"/>
             <div v-show="errors.has('pinCode')"
@@ -82,7 +83,7 @@
               class="invalid-feedback"
             >{{ errors.first('pinCode') }}</div>
           </div>
-          <div clasee="form-group">
+          <div clasee="form-group" style="display: none">
             <input
               type="checkbox"
               name="useInternalWallet"

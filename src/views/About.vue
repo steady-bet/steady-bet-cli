@@ -7,9 +7,12 @@
     <p>We have many goals with developping this Dapp</p>
     <ul>
       <li>
-        We aim to develop a new solution for sport betting with very fast transaction support.
-        To achieve this, we selected CREDITS blockchain and each bet is registered in real time in the blockchain in a specific smartcontract.
-        The first step is to build a demo App that will run with Credits Testnet.
+        We aim to develop a new solution for sport betting with very fast transaction support. We need fast transactions as we really want that bets sent from user are 
+        stored in the smartcontract and updated on the user interface. So bettings odds that you see from interface are red from the blockchain in real time.
+      </li>
+      <li>
+        The first step is to build a MVP that automatically deploy smartcontract for some selected teams, take bets from users, close bets 
+        when match start and display it in live webpage, and then close the smartcontract and pay winners.
       </li>
       <li>
         A second step is to continue to improve this Dapps and bring many new features.
@@ -42,10 +45,11 @@
       </p>
       <p>
         When a match is finished, we get the result automatically from external data sources and we call the method that will finalize the smartcontract and compute
-        winners and loosers list. Then payments are automatically done.
+        winners and loosers list. Then payments are automatically done by the smartcontract itself.
       </p>
       <p>
-        Winners share the whole smartcontract balance minus some devs fee.
+        Winners share the whole smartcontract balance minus some devs fee. If there is no winner or no looser, then the smartcontract will automatically cancel all bets 
+        and send back money to everyone who bet on this match, no fees are taken by the smartcontract in this case.
       </p>
     <h2>Personal wallet and server side wallet - to be done</h2>
     <p> As they are no perfect solution to secure sensitive data on client side (See for exemple MyEtherWallet disclaimer), we decided to create along with the user account a new wallet on server side.
@@ -62,19 +66,22 @@
         improving and fixing existing pages
       </li>
       <li>
-        improve layout for bet history + refactoring of user bet storage
+        improve some performances and smartcontract.
       </li>
       <li>
         build the final test server
       </li>
       <li>
-        create server side wallet
+        create server side wallet and allow bet from it
       </li>
       <li>
         create the profile page and easy transfer between your server and personal wallet
       </li>
       <li>
         refactoring of the whole site with bootstrap to make the Dapp multi-device friendly.
+      </li>
+      <li>
+        create some contests 
       </li>
     </ul>
   </div>

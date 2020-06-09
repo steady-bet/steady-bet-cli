@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <h1>SteadyBet</h1>
+    <h1>SteadyBet <br>(Testnet)</h1>
     <nav id="navbar" class="hnav">
       <ul>
         <li>

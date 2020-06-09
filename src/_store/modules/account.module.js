@@ -5,7 +5,7 @@ import router from '../../router'
 const user = JSON.parse(localStorage.getItem('user'))
 
 // create state of account
-const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
+const state = user ? { status: { loggedIn: true }, user } : { status: {loggedIn: false}, user: null }
 
 const actions = {
   login ({ dispatch, commit }, { username, password }) {
@@ -71,26 +71,27 @@ const mutations = {
     state.user = user
   },
   loginFailure (state) {
-    state.status = {}
+    state.status = { loggedIn: false }
     state.user = null
   },
   logout (state) {
-    state.status = {}
+    state.status = { loggedIn: false }
     state.user = null
   },
   registerRequest (state, user) {
     state.status = { registering: true }
   },
   registerSuccess (state) {
-    state.status = {}
+    state.status = { loggedIn: false }
   },
   registerFailure (state, error) {
-    state.status = {}
+    state.status = { loggedIn: false }
   }
 }
 
 const getters = {
-  user: state => state.user
+  user: state => state.user,
+  status: state => state.status
 }
 
 // expose account store

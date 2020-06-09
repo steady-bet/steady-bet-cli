@@ -5,6 +5,9 @@
         <header class="modal-header">
           <slot name="header">
             Let's bet for {{selectedBet.teamName}} !!!
+            <p class="error-msg"
+              v-if="this.$store.getters['account/status'].loggedIn === false"
+            >You have to be connected with your account</p>
             <div class="wait-msg">
               <br />
               <span v-if="waiting" class="setborder">Wait for confirmation</span>
@@ -28,6 +31,7 @@
             >Token available : {{ $store.getters['wallet/walletData'].csBalance | toCredits }}</p>
             <div v-if="!betValidated">
               <br />
+              <label>Amount to bet : </label>
               <input
                 id="amountToBet"
                 v-model="amountToBet"
@@ -37,12 +41,14 @@
               />
               <br />
               <br />
+              <label v-if="$store.getters['wallet/walletData'].useInternalWallet == false">Private key : </label>
               <input
                 v-if="$store.getters['wallet/walletData'].useInternalWallet == false"
                 id="privateKey"
                 v-model="privateKey"
                 type="text"
-                placeholder="privateKey needed to sign and confirm transaction"
+                placeholder=""
+                size="40"
               />
               <div v-if="$store.getters['wallet/walletData'].useInternalWallet">
                 <label for="pinCode">PinCode</label>
@@ -59,7 +65,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button v-if="displayBetButton" type="button" class="btn-green" @click="betIt">Bet !</button>
+            <button v-if="displayBetButton  && this.$store.getters['account/status'].loggedIn" type="button" class="btn-green" @click="betIt">Bet !</button>
             <button v-if="!betValidated" type="button" class="btn-red" @click="close">Cancel</button>
             <button v-if="betValidated" type="button" class="btn-green" @click="close">Ok</button>
           </slot>

@@ -3,7 +3,8 @@
         <div class="bet-item">
             <dl>
               <dt>Match</dt>
-              <dd><strong>{{bet.matchName}}</strong>  [ {{ bet.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss") }} ]</dd>
+              <dd v-if="bet.team1Score===null"><strong>{{bet.matchName}}</strong> [ {{ bet.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss") }} ]</dd>
+              <dd v-else><strong>{{bet.matchName}}  ({{bet.team1Score}}-{{bet.team2Score}})</strong>  [ {{ bet.matchDate | moment(false, "MM-DD-YYYYTHH:mm:ss") }} ]</dd>
 
               <dt>Bet amounts</dt>
               <dd>

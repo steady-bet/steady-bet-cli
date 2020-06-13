@@ -11,7 +11,7 @@
         stored in the smartcontract and updated on the user interface. So bettings odds that you see from interface are red from the blockchain in real time.
       </li>
       <li>
-        The first step is to build a MVP that automatically deploy smartcontract for some selected teams, take bets from users, close bets 
+        The first step is to build a POC that automatically deploy smartcontract for some selected teams, take bets from users, close bets 
         when match start and display them in live webpage. When match is finished smartcontract is called to pay winners and then close the smartcontract.
         This is what we have now.
       </li>
@@ -41,7 +41,11 @@
         This will also help for the most curious to follow the building of this project and also see another project working on Credits blockchain and use some smartcontracts. 
         Credits blockchain is fast and we choose this blockchain to improve user experience and have bets working in real time.
       </p>
+      <p>
+        Also as it s a TEST version on TESTNET, be warn that sometimes data can be deleted as Testnet can be reset by Credits team or even if we have a big migration to do from one version to a new one we can decide to clean some history.
+      </p>
     <h2>How it works</h2>
+      <p>The first thing you need to do is to register and create your account to be able to play and send your bets to the DApps/Blockchain</p>
       <p>Here is a testnet version, so be sure to create a wallet on testnet network and hold some CS there. Use links above to create a wallet and get your CS</p>
       <p>
         This is Dapp for Peer to Peer betting solution. That means there is no bookmakers and bet odds are directly calculated from bet made by users.

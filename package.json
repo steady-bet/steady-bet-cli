@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap-vue-treeview": "^1.0.8",
     "liquor-tree": "^0.2.53",
     "vue": "^2.6.6",
